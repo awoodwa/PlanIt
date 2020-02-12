@@ -1,0 +1,37 @@
+Project proposal summary:
+
+1. Potential users: residents and government
+2. Primary use cases: 
+	Determine cost of implementing renewable energy structures
+		Provided suggested renewable structures ideal for region
+		- if government, pull census data and energy per capita data
+		- if resident, pull average monthly energy bill
+	Prediction of cost to install suggested structures
+	Predict money saved using forecasts
+	Output moeny saved using renwable sources
+3. Data we will be using:
+	Solar radiation - 
+	 1. https://www.ncdc.noaa.gov/data-access/land-based-station-data/land-based-datasets/solar-radiation
+	 2. ftp://ftp.ncdc.noaa.gov/pub/data/nsrdb-solar/
+	
+	Wind data - 
+	 1. https://data.nrel.gov/submissions/54
+	 2. ftp://ftp.ncdc.noaa.gov/pub/data/normals/1981-2010/source-datasets/	
+
+	Census - 
+	 1. https://www.census.gov/data/tables/time-series/demo/popest/2010s-counties-detail.html#par_textimage_1383669527
+
+	Energy per capita - 
+	 1. https://www.eia.gov/state/seds/data.php?incfile=/state/seds/sep_sum/html/rank_use_capita.html&sid=US
+	
+
+Stretch goal:
+	- Include regulations of states/cities
+		allow residents to use wind 
+	- Include gov subsidies
+	- Take into account climate change trends for predicting savings
+	- interactive wish list (timeline vs cost, percentage of energy from renwable sources) 
+	- Take into account waterways 
+
+
+
