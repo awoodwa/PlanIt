@@ -6,7 +6,10 @@
             <h2 class="title">Build your PlanIt: </h2>
             <form method="POST">
                 <div class="form-field">{{ form.user_type.label }}{{ form.user_type }}</div>
-               
+                <div class="form-field">{{ form.location.label }}{{ form.location }}</div>
+                <div class="form-field">{{ form.monthly_eng.label }}{{ form.monthly_eng }}</div>
+                <div class="form-field">{{ form.renewable.label }}{{ form.renewable }}</div>
+                <div class="form-field">{{ form.api_key.label }}{{ form.api_key }}</div>
                 {{form.submit}}
             </form>
         </div>

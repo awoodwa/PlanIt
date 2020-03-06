@@ -9,9 +9,9 @@ class InputData(FlaskForm):
     monthly energy used, desired percentage renewable """ 
 
     user_type = wtforms.SelectField("User Type: ", choices=[("Government","Government"),("Resident","Resident")])
-    #location = wtforms.StringField("City/Town: ", [DataRequired()])
-    #monthly_eng = wtforms.StringField("Energy usage (monthly): ", [DataRequired()])
-    #renewable = wtforms.StringField("Energy Percentage Renewables: ", [DataRequired()])
+    location = wtforms.StringField("City/Town: ", [DataRequired()])
+    monthly_eng = wtforms.StringField("Energy usage (monthly): ", [DataRequired()])
+    renewable = wtforms.StringField("Energy Percentage Renewables: ", [DataRequired()])
     api_key = wtforms.StringField("API Key: ", [DataRequired()])
     #recaptcha = RecaptchaField()
     submit = wtforms.SubmitField("Submit")
