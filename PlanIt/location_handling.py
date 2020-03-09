@@ -3,9 +3,10 @@ import numpy as np
 import math
 from scipy.spatial import distance
 
+
 def get_loc(city, state):
     '''
-    This function takes zipcode or user inputted location as an input
+    This function takes city and state as an input
     and returns the longitude and latitude coordinates of that location.
 
     Inputs
@@ -13,24 +14,86 @@ def get_loc(city, state):
         state : string of state ID (e.g. AK for Arkansas)
 
     Outputs
-        location : tuple containing latitude and longitude
+        loc : tuple of latitude and longitude values
     '''
     directory = pd.read_csv('uscities_edit.csv')
+    
+    row = directory.loc[(directory['state_id'] == state) &
+                        (directory['city'] == city)]
 
-    try:
-        row = directory.loc[directory['state_id'] == state and\
-                      directory['city'] == city]
+    loc = (row['lat'], row['lng'])
 
-        location = (directory[row]['lat'], directory[row]['lng'])
+    return loc
 
-    except:
-        print('Your inputted city and state is not recognized. Please try\
-              a neighboring town.')
 
-    return location
+def wtk_locator(wtk, loc):
+    '''
+    This function finds the nearest latitude and longitude coordinates in
+    the wind toolkit database.
 
-    #I don't think we need zipcode after all? I checked the data and there are
-    #no repeated cities within a state.
+    Inputs
+        wtk : h5pyd.File instance for the wind toolkit
+        loc : tuple of latitude and longitude coordinates
+
+    Outputs
+        nearest_wtk : tuple of latitude and longitude in database
+    '''
+    coords = wtk['coordinates']
+    c = pd.DataFrame(coords)
+
+    min_dist = math.inf
+    nearest_wtk = ()
+
+    for i in range(c.shape[1]):
+        for j in range(c.shape[0]):
+            check = tuple(c[i][j])
+            dist = distance.euclidean(loc, check)
+            if dist < min_dist:
+                min_dist = dist
+                nearest_wtk = check
+            else:
+                pass
+
+    return nearest_wtk
+
+
+def nsrdb_locator(nsrdb, loc):
+    '''
+    This function finds the nearest lattitude and longitude coordinates
+    in the NSR database.
+
+    Inputs
+        nsrdb : h5pyd.File instance
+        loc : tuple of latitude and longitude
+
+    Outputs
+        result : list containing the location tuple (latitude and
+            longitude) of the nearest input in database and the index
+            of that row in the database
+                    result[0] = (lat, long)
+                    result[1] = index
+    '''
+    result = []
+    coords = nsrdb['coordinates'][...]
+
+    min_dist = math.inf
+    nearest_nsrdb = (0, 0)
+    idx = 0
+
+    for index in range(len(coords)):
+        dist = distance.euclidean(loc, coords[index])
+        if dist < min_dist:
+            min_dist = dist
+            nearest_nsrdb = tuple(coords[index])
+            idx = index
+        else:
+            pass
+
+    result.append(nearest_nsrdb)
+    result.append(idx)
+
+    return result
+
 
 def get_pop(location):
     '''
@@ -45,71 +108,12 @@ def get_pop(location):
     '''
 
     directory = pd.read_csv('uscities_edit.csv')
+    lat = location[0]
+    lng = location[1]
 
-    row = directory.loc[directory['lat'] == location[0] and\
-        directory['lng'] == location[1]]
+    row = directory.loc[(directory['lat'] == lat) &
+                        (directory['lng'] == lng)]
 
-    population = directory[row]['population']
+    population = row['population'].values[0]
 
     return population
-
-def get_energy_per_cap(state):
-    '''
-    This function gets the average energy use per capita of a given state.
-
-    Inputs
-        state : string of state ID (e.g. AK for Arkansas)
-
-    Outputs
-        energy_per_cap :
-    '''
-
-    directory = pd.read_csv('filename')
-
-    row = directory.loc[directory['state_id'] == state]
-
-    energy_per_cap = directory[row]['total_energy']
-
-    return energy_per_cap
-
-def get_tot_energy(pop, energy):
-    '''
-    This function calculates the energy use of a given population size
-    based on average energy use in a given state.
-
-    Inputs
-        pop : integer value of population size
-        energy : energy use per capita
-
-    Outputs
-        energy_use : float of energy use
-    '''
-    #DOES PER CAPITA HAPPEN BY 1000??????
-    energy_use = pop * energy
-
-def nearest_solar_station(location):
-    '''
-    This function finds the nearest neighbor solar collection station.
-
-    Inputs
-        location : tuple containing latitude and longitude
-
-    Outputs
-        station_id : integer of station ID number
-    '''
-    solar_directory = pd.read_csv('solar_stations.csv')
-
-    min_dist = math.inf
-    min_dist_id = ''
-
-    for index in range(len(solar_directory)):
-        solar_loc = (solar_directory[index]['ISH_LAT (dd)'], solar_directory[index]['ISH_LON(dd)'])
-        dist = distance.euclidean(location, solar_loc)
-        if dist < min_dist:
-            min_dist = dist
-            min_dist_id = solar_directory[index]['id']
-        else:
-            pass
-
-    return min_dist_id
-        # in order to call the solar data csv call the id.tar.csv????
