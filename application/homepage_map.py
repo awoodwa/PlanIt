@@ -18,7 +18,7 @@ def states():
         latitude='lat:Q',
         size=alt.value(15),
         color=alt.value('#3377B3'),
-        tooltip=['iata:N','name:N','city:N','state:N','latitude:Q','longitude:Q'],
+        tooltip=['lon:N','lat:N','state:N','city:N'],
         )
 
     chart = (background + points)
