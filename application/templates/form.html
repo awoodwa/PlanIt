@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+    <li><a href="{{ url_for("home") }}">Home</a></li>
     <head></head>
-    <body class="{{template}}">
-        <div class="formwrapper">
-            <h2 class="title">Build your PlanIt: </h2>
-            <form method="POST">
-                <div class="form-field">{{ form.user_type.label }}{{ form.user_type }}</div>
-                <div class="form-field">{{ form.location.label }}{{ form.location }}</div>
-                <div class="form-field">{{ form.monthly_eng.label }}{{ form.monthly_eng }}</div>
-                <div class="form-field">{{ form.renewable.label }}{{ form.renewable }}</div>
-                <div class="form-field">{{ form.api_key.label }}{{ form.api_key }}</div>
+    <body class="{{template}}" style="background-color: black;">
+        <div class="formwrapper" >
+            <h2 class="title" style="color: honeydew;">Build your PlanIt: </h2>
+            <form method="POST" style="background-color: black;">
+                <div class="form-field" style="color: ivory;">{{ form.user_type.label }}{{ form.user_type }}</div>
+                <div class="form-field" style="color: ivory;">{{ form.location.label }}{{ form.location }}</div>
+                <div class="form-field" style="color: ivory;">{{ form.monthly_eng.label }}{{ form.monthly_eng }}</div>
+                <div class="form-field" style="color: ivory;">{{ form.renewable.label }}{{ form.renewable }}</div>
+                <div class="form-field" style="color: ivory;">{{ form.api_key.label }}{{ form.api_key }}</div>
                 {{form.submit}}
             </form>
         </div>
+       
     </body>
 </html>
 
