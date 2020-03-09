@@ -2,3 +2,15 @@ https://hackersandslackers.com/managing-user-session-variables-with-flask-sessio
 
 https://www.freecodecamp.org/news/how-to-build-a-web-application-using-flask-and-deploy-it-to-the-cloud-3551c985e492/
 
+ collected_data.append(request.form.get("state"))
+        collected_data.append(request.form.get("location"))
+        collected_data.append(request.form.get("monthly_eng"))
+        collected_data.append(request.form.get("renewable"))
+        collected_data.append(request.form.get("api_key"))
+        # run "build_config.py" to build file for accessing NREL data
+        build_hscfg.config_file(collected_data[5])
+
+        loc_handling = location_handling.get_loc(
+            collected_data[2], collected_data[1])
+        print(loc_handling)
+        message = loc_handling  # "config file has been built"

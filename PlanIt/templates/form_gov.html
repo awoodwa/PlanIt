@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <li><a href="{{ url_for("home") }}">Home</a></li>
+    <head></head>
+    {% for message in get_flashed_messages() %}
+    <p style="color: red;">{{ message }}</p>
+    {% endfor %}
+    <body class="{{template}}" style="background-color: black;">
+        <div class="formwrapper" >
+            <h2 class="title" style="color: honeydew;">Build your PlanIt: </h2>
+            <form method="POST" style="background-color: black;">                
+                <div class="form-field" style="color: ivory;">{{ form_gov.state.label }}{{ form_gov.state }}</div>
+                <div class="form-field" style="color: ivory;">{{ form_gov.location.label }}{{ form_gov.location }}</div>
+                <div class="form-field" style="color: ivory;">{{ form_gov.monthly_eng.label }}{{ form_gov.monthly_eng }}</div>
+                <div class="form-field" style="color: ivory;">{{ form_gov.renewable.label }}{{ form_gov.renewable }}</div>
+                <div class="form-field" style="color: ivory;">{{ form_gov.land_ava.label }}{{ form_gov.land_ava }}</div>
+                <div class="form-field" style="color: ivory;">{{ form_gov.api_key.label }}{{ form_gov.api_key }}</div>
+                {{form_gov.submit}}
+            </form>
+        </div>
+       <img align="right" src="static/Picture1.jpg"/>
+    </body>
+</html>
+
+
