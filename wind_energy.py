@@ -1,11 +1,9 @@
 import math
-
 import h5pyd
 import dateutil
 import numpy as np
 import pandas as pd
 from scipy.interpolate import CubicSpline  # for power_eff
-from pyproj import Proj
 from reliability.Fitters import Fit_Weibull_2P  # for weibull_coeff
 
 
@@ -151,3 +149,87 @@ def wind_energy_output(tseries):
     aeo_mwh = (hours_year * 0.5 * rho * area * summ)/1e6
 
     return aeo_mwh
+
+def create_tseries(wtk, loc):
+    '''
+    Creates a list of time series for inputs in other functions.
+
+    Inputs
+        wtk : h5pyd file
+        loc : tuple of latitude and longitude
+
+    Outputs
+        tseries_list : list of tseries for 2007 - 2013
+    '''
+    # create dset
+    dset = wtk['windspeed_100m']
+
+    dt = wtk['datetime']
+    dt = pd.DataFrame({'datetime':dt[:]}, index = range(0, dt.shape[0]))
+    dt['datetime'] = dt['datetime'].apply(dateutil.parser.parse)
+
+    twenty07 = dt.loc[(dt.datetime >= '2007-01-01') &
+                      (dt.datetime < '2008-01-01')].index
+    twenty08 = dt.loc[(dt.datetime >= '2008-01-01') &
+                      (dt.datetime < '2009-01-01')].index
+    twenty09 = dt.loc[(dt.datetime >= '2009-01-01') &
+                      (dt.datetime < '2010-01-01')].index
+    twenty10 = dt.loc[(dt.datetime >= '2010-01-01') &
+                      (dt.datetime < '2011-01-01')].index
+    twenty11 = dt.loc[(dt.datetime >= '2011-01-01') &
+                      (dt.datetime < '2012-01-01')].index
+    twenty12 = dt.loc[(dt.datetime >= '2012-01-01') &
+                      (dt.datetime < '2013-01-01')].index
+    twenty13 = dt.loc[(dt.datetime >= '2013-01-01') &
+                      (dt.datetime < '2014-01-01')].index
+
+    time_slices = [twent07, twenty08, twenty09, twenty10, twenty11, twenty12,
+                   twenty13]
+
+    tseries_list = []
+
+    for i in time_slices:
+        t = dset[min(i):max(i) + 1, loc[0], loc[1]]
+        tseries_list.append(t)
+
+    return tseries_list
+
+
+def aeo_average(wtk, loc):
+    '''
+    This function creates the average over all 7 years of wind energy.
+
+    Inputs
+        tseries_list : list of time series
+
+    Outputs
+        average : average over 7 years
+    '''
+    tseries_list = create_tseries(wtk, loc)
+    averages = []
+    
+    for i in tseries_list:
+        averages.append(wind_energy_output(i))
+
+    average = sum(averages)/len(averages)
+
+    return average
+
+
+def wind_landuse(land_available, tseries_list):
+    '''
+    This function calculates the maximum power output achieved by wind
+    energy alone in a given location with given land availability.
+
+    Inputs
+        land_available : float of land free user input in km^2
+        tseries_list : output of create_tseries; list of time series
+
+    Outputs
+        max_power_output : max power to be harvested in land area
+    '''
+    # 0.4 km^2/turbine approximately
+    num_turbines = land_available / 0.4
+    max_power_output = num_turbines * (aeo_average(tseries_list)/8760)
+
+    return max_power_output

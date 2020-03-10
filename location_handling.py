@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import math
-from scipy.spatial import distance
 
 
 def get_loc(city, state):
@@ -32,7 +31,7 @@ def wtk_locator(wtk, loc):
     the wind toolkit database.
 
     Inputs
-        wtk : h5pyd.File instance for the wind toolkit
+        wtk : h5pyd file
         loc : tuple of latitude and longitude coordinates
 
     Outputs
@@ -47,7 +46,7 @@ def wtk_locator(wtk, loc):
     for i in range(c.shape[1]):
         for j in range(c.shape[0]):
             check = tuple(c[i][j])
-            dist = distance.euclidean(loc, check)
+            dist = ((check[0]-loc[0])**2 +(check[1]-loc[1])**2)
             if dist < min_dist:
                 min_dist = dist
                 nearest_wtk = check
@@ -55,44 +54,6 @@ def wtk_locator(wtk, loc):
                 pass
 
     return nearest_wtk
-
-
-def nsrdb_locator(nsrdb, loc):
-    '''
-    This function finds the nearest lattitude and longitude coordinates
-    in the NSR database.
-
-    Inputs
-        nsrdb : h5pyd.File instance
-        loc : tuple of latitude and longitude
-
-    Outputs
-        result : list containing the location tuple (latitude and
-            longitude) of the nearest input in database and the index
-            of that row in the database
-                    result[0] = (lat, long)
-                    result[1] = index
-    '''
-    result = []
-    coords = nsrdb['coordinates'][...]
-
-    min_dist = math.inf
-    nearest_nsrdb = (0, 0)
-    idx = 0
-
-    for index in range(len(coords)):
-        dist = distance.euclidean(loc, coords[index])
-        if dist < min_dist:
-            min_dist = dist
-            nearest_nsrdb = tuple(coords[index])
-            idx = index
-        else:
-            pass
-
-    result.append(nearest_nsrdb)
-    result.append(idx)
-
-    return result
 
 
 def get_pop(location):
