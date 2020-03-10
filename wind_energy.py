@@ -4,10 +4,9 @@ import h5pyd
 import dateutil
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from scipy.interpolate import CubicSpline # for power_eff
+from scipy.interpolate import CubicSpline  # for power_eff
 from pyproj import Proj
-from reliability.Fitters import Fit_Weibull_2P #for weibull_coeff
+from reliability.Fitters import Fit_Weibull_2P  # for weibull_coeff
 
 
 def power_eff(wind_sp):
@@ -24,8 +23,9 @@ def power_eff(wind_sp):
     speed
     """
     x = list(np.arange(3, 26.0, 1))
-    y = [0.26, 0.35, 0.4, 0.41, 0.425, 0.445, 0.445, 0.425,0.38, 0.335, 0.28,
-     0.23, 0.19, 0.16, 0.13, 0.11, 0.09, 0.075, 0.065, 0.05, 0.04, 0.03, 0.02]
+    y = [0.26, 0.35, 0.4, 0.41, 0.425, 0.445, 0.445, 0.425, 0.38, 0.335, 0.28,
+         0.23, 0.19, 0.16, 0.13, 0.11, 0.09, 0.075, 0.065, 0.05, 0.04, 0.03,
+         0.02]
 
     cs = CubicSpline(x, y)
 
@@ -52,7 +52,7 @@ def weibull_coeff(tseries):
     """
     data = list(tseries)
     wb = Fit_Weibull_2P(failures=data, show_probability_plot=False,
-    print_results=False)
+                        print_results=False)
     k = wb.beta
     c = wb.alpha
 
@@ -79,6 +79,7 @@ def weibull_pdf(wind_sp, k, c):
 
     return pdf
 
+
 def summation(tseries):
     """ Sums Cp*wind speed^3* pdf for a range of windspeeds. Prevents
     wind speeds that are too low and too high for wind turbine operation from
@@ -99,18 +100,18 @@ def summation(tseries):
     summ_list = []
     k, c = weibull_coeff(tseries)
 
-    #incrementing by 1 keeps the PDF at 1
+    # incrementing by 1 keeps the PDF at 1
     for wind_sp in np.arange(tseries.min(), tseries.max(), 1.0):
         Cp = power_eff(wind_sp)
         pdf = weibull_pdf(wind_sp, k, c)
 
         tot_sp = Cp * wind_sp**3
-        max_sp = 378 # max wind speed (for max power of turbine) for the
+        max_sp = 378  # max wind speed (for max power of turbine) for the
                      # rho and A from turbine specs is 378
                      # 2430 kW = 0.5 * rho * A * Cp * v^3
 
         # wind must be between 3.5 and 25 m/s for turbine operation
-        if wind_sp <3.5 or wind_sp >25.0:
+        if wind_sp < 3.5 or wind_sp > 25.0:
             pass
         # for the turbine specs max power 2430 kW.
         # This bit of code makes sure not to account for power over the limit.
@@ -142,9 +143,9 @@ def wind_energy_output(tseries):
     """
     summ = summation(tseries)
 
-    rho = 1.225 #air density
-    area = math.pi*(115.6/2)**2 #area of wind turbine blade
-    hours_year = 365*24 #hours in a year
+    rho = 1.225  # air density
+    area = math.pi*(115.6/2)**2  # area of wind turbine blade
+    hours_year = 365*24  # hours in a year
 
     # divide by 1e6 so AEO output is in MWh
     aeo_mwh = (hours_year * 0.5 * rho * area * summ)/1e6
