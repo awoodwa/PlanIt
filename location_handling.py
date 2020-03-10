@@ -21,7 +21,7 @@ def get_loc(city, state):
     row = directory.loc[(directory['state_id'] == state) &
                         (directory['city'] == city)]
 
-    loc = (row['lat'], row['lng'])
+    loc = (row['lat'].values[0], row['lng'].values[0])
 
     return loc
 
