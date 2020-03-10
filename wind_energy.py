@@ -203,11 +203,11 @@ def aeo_average(wtk, loc):
         tseries_list : list of time series
 
     Outputs
-        average : average over 7 years
+        average : average energy over 7 years (MWh)
     '''
     tseries_list = create_tseries(wtk, loc)
     averages = []
-    
+
     for i in tseries_list:
         averages.append(wind_energy_output(i))
 
