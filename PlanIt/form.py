@@ -8,6 +8,6 @@ class InputData(FlaskForm):
     user type, location, household size,
     monthly energy used, desired percentage renewable """
 
-    user_type = wtforms.SelectField("*User Type: ",
+    user_type = wtforms.SelectField("*User Type:    ",
     choices=[("Government", "Government"), ("Resident", "Resident")])
     submit = wtforms.SubmitField("Submit")

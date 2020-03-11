@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <li><a href="{{ url_for("home") }}">Home</a></li>
+    <head>
+        <style>
+            body {
+                background-color: black;
+            }
+            h1 {
+                color: white;
+            }
+            p {
+                color: white;
+            }
+            table, th, td {
+                color: white;
+            }
+            td {
+                text-align: left;
+            }
+        </style>
+        <title>Results</title>
+    </head>
+    <body>
+        <div>
+            <h1>Suggested PlanIt</h1>
+            <table style="width:100%">
+                <tr>
+                    <td style="text-align: right;">Number of Solar Panels: </td>
+                    <td>{{ result }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Energy Produced from Solar Panels: </td>
+                    <td>{{ result }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Cost of Solar Panels: </td>
+                    <td>{{ result }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Number of Wind Turbines: </td>
+                    <td>{{ result }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Energy Produced from Wind Turbines: </td>
+                    <td>{{ result }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Cost of Wind Turbines: </td>
+                    <td>{{ result }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Total Energy Produced from Renewables: </td>
+                    <td>{{ result }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Total Cost of Implementing Renewables: </td>
+                    <td>{{ result }}</td>
+                </tr>
+            </table>
+            
+        </div>
+    </body>
+</html>

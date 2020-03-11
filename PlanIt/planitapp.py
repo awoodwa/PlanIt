@@ -17,12 +17,6 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/results/<py_results>")
-def results(py_results):
-    result = py_results
-    return render_template("results.html", result=result)
-
-
 @app.route("/PlanIt", methods=("GET", "POST"))
 def form():
     collected_data = []
@@ -57,9 +51,9 @@ def form_gov():
                 collected_data[2], collected_data[1])
             #if loc_handling == len(0)
             message = loc_handling  # "config file has been built"
-            return redirect(url_for("results", py_results=message))
+            return redirect(url_for("results_gov", gov_results=message))
         except IndexError:
-            flash("Check 'City/Town' spelling or try a nearby city")
+            flash("ERROR 'City/Town' spelling or try a nearby city")
             #return redirect(url_for("form_res"))
             return render_template("form_gov.html", form_gov=form_gov)
     return render_template("form_gov.html", form_gov=form_gov)
@@ -74,20 +68,33 @@ def form_res():
             collected_data.append("Resident")
             collected_data.append(request.form.get("state"))
             collected_data.append(request.form.get("location"))
+            collected_data.append(request.form.get("household"))
             collected_data.append(request.form.get("monthly_eng"))
             collected_data.append(request.form.get("renewable"))
             collected_data.append(request.form.get("api_key"))
             # run "build_config.py" to build file for accessing NREL data
-            build_hscfg.config_file(collected_data[5])
+            build_hscfg.config_file(collected_data[6])
             loc_handling = location_handling.get_loc(
                 collected_data[2], collected_data[1])
             message = loc_handling  # "config file has been built"
-            return redirect(url_for("results", py_results=message))
+            return redirect(url_for("results_res", res_results=message))
         except IndexError:
-            flash("Check 'City/Town' spelling or try a nearby city")
+            flash("ERROR 'City/Town' spelling or try a nearby city")
             #return redirect(url_for("form_res"))
             return render_template("form_res.html", form_res=form_res)
     return render_template("form_res.html", form_res=form_res)
+
+
+@app.route("/results_res/<py_results>")
+def results_res(res_results):
+    result = res_results
+    return render_template("results_res.html", result=result)
+
+
+@app.route("/results_gov/<gov_results>")
+def results_gov(gov_results):
+    result = gov_results
+    return render_template("results_gov.html", result=result)
 
 
 @app.route("/about")
