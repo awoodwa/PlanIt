@@ -13,7 +13,7 @@ def get_tot_energy_per_cap(state):
         energy_use : float value in kWh
     '''
 
-    directory = pd.read_csv('complete_seds.csv')
+    directory = pd.read_csv('SEDS_edit.csv')
 
     row = directory.loc[(directory['StateCode'] == state) &\
                         (directory['Year'] == 2017) &\
@@ -35,7 +35,7 @@ def get_res_energy_per_cap(state):
     Outputs
         energy_use : float value in kWh
     '''
-    directory = pd.read_csv('complete_seds.csv')
+    directory = pd.read_csv('SEDS_edit.csv')
 
     row = directory.loc[(directory['StateCode'] == state) &\
                         (directory['Year'] == 2017) &\
