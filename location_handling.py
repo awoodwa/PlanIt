@@ -44,7 +44,7 @@ def wtk_locator(wtk, location):
                     +x_0=0 +y_0=0 +ellps=sphere \
                     +units=m +no_defs')
 
-    x_origin, y_origin = reversed(coorinates[0][0])
+    x_origin, y_origin = reversed(coordinates[0][0])
     origin = projectLcc(x_origin, y_origin)
 
     lon = location[1]
