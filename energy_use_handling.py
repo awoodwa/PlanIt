@@ -19,7 +19,7 @@ def get_tot_energy_per_cap(state):
                         (directory['Year'] == 2017) &\
                         (directory['MSN'] == 'TETPB')]
 
-    energy_use = row['Data'].values[0] * 293.07107 # convert to kWh
+    energy_use_per_cap_tot = row['Data'].values[0] * 293.07107 # convert to kWh
 
     return energy_use_per_cap_tot
 
