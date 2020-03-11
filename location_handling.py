@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import math
+from pyproj import Proj
 
 
 def get_loc(city, state):
@@ -25,37 +26,37 @@ def get_loc(city, state):
     return loc
 
 
-def wtk_locator(wtk, loc):
+def wtk_locator(wtk, location):
     '''
     This function finds the nearest latitude and longitude coordinates in
     the wind toolkit database.
 
     Inputs
         wtk : h5pyd file
-        loc : tuple of latitude and longitude coordinates
+        location : tuple of latitude and longitude coordinates
 
     Outputs
-        nearest_wtk : tuple of latitude and longitude in database
+        tuple(reversed(ij)) : tuple of latitude and longitude indices
     '''
-    coords = wtk['coordinates']
-    c = pd.DataFrame(coords)
+    coordinates = wtk['coordinates']
+    projectLcc = Proj('+proj=lcc +lat_1=30 +lat_2=60 \
+                    +lat_0=38.47240422490422 +lon_0=-96.0 \
+                    +x_0=0 +y_0=0 +ellps=sphere \
+                    +units=m +no_defs')
 
-    min_dist = math.inf
-    nearest_wtk = ()
-    index = (0, 0)
+    x_origin, y_origin = reversed(coorinates[0][0])
+    origin = projectLcc(x_origin, y_origin)
 
-    for i in range(c.shape[0]):
-        for j in range(c.shape[1]):
-            check = c[j][i]
-            dist = ((check[0]-loc[0])**2 +(check[1]-loc[1])**2)
-            if dist < min_dist:
-                min_dist = dist
-                nearest_wtk = check
-                index = (i, j)
-            else:
-                pass
+    lon = location[1]
+    lat = location[0]
 
-    return index
+    coords = projectLcc(lon, lat)
+
+    delta = np.subtract(coords, origin)
+
+    ij = [int(round(x/2000)) for x in delta]
+
+    return tuple(reversed(ij))
 
 
 def get_pop(location):
