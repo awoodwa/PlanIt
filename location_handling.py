@@ -51,7 +51,7 @@ def wtk_locator(wtk, loc):
             if dist < min_dist:
                 min_dist = dist
                 nearest_wtk = check
-                index = (i, j)
+                index = (j, i)
             else:
                 pass
 
