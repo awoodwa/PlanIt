@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <li><a href="/">Home</a></li>
+    <head></head>
+    <body class="" style="background-color: black;">
+        <div class="formwrapper" >
+            <h2 class="title" style="color: honeydew;">Build your PlanIt: </h2>
+            <form method="POST" style="background-color: black;">
+                <div class="form-field" style="color: ivory;"><label for="user_type">*User Type:    </label><select id="user_type" name="user_type"><option value="Government">Government</option><option value="Resident">Resident</option></select></div>
+                <div ><input id="submit" name="submit" type="submit" value="Submit"></div>
+                
+            </form>
+        </div>
+       <img align="right" src="static/Picture1.jpg"/>
+    </body>
+</html>
+

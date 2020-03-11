@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <li><a href="/">Home</a></li>
+    <head>
+        <title>About PlanIt</title>
+        
+    </head>
+    <body class="">
+        
+        <div>
+            <h1></h1>
+            <p>(insert an overview of what PlanIt)</p>
+        </div>
+    </body>
+</html>
