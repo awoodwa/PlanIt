@@ -224,6 +224,6 @@ def wind_landuse(land_available, wtk, loc_idx):
     '''
     # 0.4 km^2/turbine approximately
     num_turbines = land_available / 0.4
-    max_power_output = num_turbines * (aeo_average(wtk, loc_idx))
+    max_energy_output = num_turbines * (aeo_average(wtk, loc_idx))
 
     return max_energy_output
