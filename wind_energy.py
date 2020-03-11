@@ -219,10 +219,10 @@ def wind_landuse(land_available, tseries_list):
         tseries_list : output of create_tseries; list of time series
 
     Outputs
-        max_power_output : max power to be harvested in land area
+        max_energy_output : max power to be harvested in land area (MWh)
     '''
     # 0.4 km^2/turbine approximately
     num_turbines = land_available / 0.4
-    max_power_output = num_turbines * (aeo_average(tseries_list)/8760)
+    max_power_output = num_turbines * (aeo_average(tseries_list))
 
-    return max_power_output
+    return max_energy_output
