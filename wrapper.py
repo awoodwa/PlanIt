@@ -58,13 +58,13 @@ def wrapper(wtk, city, state, land_available, goal = 100, residential = False,\
         # if solar resources are greater than their goal
         if solar >= energy_goal:
             energy_output = energy_goal
-            panels = round(energy_goal / (250 * 8760))
-            cost = cost_handling.cost_of_solar(panels)
+            panels = round(energy_goal / (.25 * 8760))
+            cost = cost_handling.cost_of_solar(solar) * panels
         # if solar resources fall short
         else:
             energy_output = solar
-            panels = round(solar / (250 * 8760))
-            cost = cost_handling.cost_of_solar(panels)
+            panels = round(solar / (.25 * 8760))
+            cost = cost_handling.cost_of_solar(solar) * panels
 
         return [energy_output, panels, cost]
 
@@ -78,24 +78,21 @@ def wrapper(wtk, city, state, land_available, goal = 100, residential = False,\
         turbines = round(land_available / 0.4)
         wind_cost = cost_handling.cost_of_wind(turbines)
 
-        solar = solar_handling.annual_solar_mean(wtk, dataset_loc[0], dataset_loc[1])
-        panels = round(land_available * 1e6 / 1.6)
-        solar_cost = cost_handling.cost_of_solar(panels)
+        solar_raw = solar_handling.annual_solar_mean(wtk, dataset_loc)
+        panels = round(land_available * 1e6 / 1.635481)
+        solar = panels * solar_raw
+        solar_cost = cost_handling.cost_of_solar(solar_raw) * panels
 
         data = pd.DataFrame()
 
+        for p in range(panels):
+            for t in range(turbines):
+                c = cost_handling.cost_of_wind(t) +\
+                    cost_handling.cost_of_solar(p)
+                se = p * solar_raw
+                we = t * wind
+                e = se + we
+                data[p][t] = {'panels':p, 'turbines':t,
+                              'cost':c, 'energy output':e}
 
-        '''
-        Okay so what if we graphed number of turbines by number of
-        panels (min to max on each axis in discrete values).
-
-        Each block in heatmap contained data of power and cost.
-
-        Staircase of optimal area is essentially:
-            space turbines / space panels
-            0.4 km^2 / 1.6 m^2 (fix units)
-
-        But power output would be different for every location.
-
-        Hoverable? Interactive? See altair...
-        '''
+        return data 

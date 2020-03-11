@@ -13,16 +13,18 @@ def cost_of_wind(turbines):
     return cost
 
 
-def cost_of_solar(panels):
+def cost_of_solar(annual_solar_mean):
     '''
-    This function takes the number of panels to be installed and
-    calculates the cost of the installation.
+    This function calculates the cost of a solar panel installed in a
+    given location that has some annual solar intake.
 
     Inputs
-        panels : integer value of solar panels (160 USD per 1.6 m^2 panel)
+        annual_solar_mean : float of output of solar handling function (kWh)
 
     Outputs
-        cost : float value of dollars
+        cost : float in USD
     '''
-    cost = panels * 160
-    return cost 
+    daily_solar = 1000 * annual_solar_mean / 8760 # daily solar power in W
+    cost = 3.14 * daily_solar
+
+    return cost
