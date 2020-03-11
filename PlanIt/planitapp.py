@@ -1,14 +1,11 @@
-from flask import Flask, request, url_for, render_template, redirect, flash
+from flask import request, url_for, render_template, redirect, flash
 from form import InputData
 from form_res import InputData_res
 from form_gov import InputData_gov
+from app import app, pages
 import build_hscfg  # functions must be in "application" directory
 import homepage_map
 import location_handling
-
-
-app = Flask(__name__, instance_relative_config=False)
-app.config.from_object("config.Config")
 
 
 @app.route("/")
