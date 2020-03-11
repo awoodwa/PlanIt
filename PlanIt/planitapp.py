@@ -9,6 +9,10 @@ import homepage_map
 import location_handling
 
 
+app = Flask(__name__, instance_relative_config=False)
+app.config.from_object("config.Config")
+
+
 @app.route("/")
 def home():
     homepage_map.states()
