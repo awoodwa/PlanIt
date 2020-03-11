@@ -142,13 +142,13 @@ def wind_energy_output(tseries):
 
     return aeo_mwh
 
-def create_tseries(wtk, loc):
+def create_tseries(wtk, loc_idx):
     '''
     Creates a list of time series for inputs in other functions.
 
     Inputs
         wtk : h5pyd file
-        loc : tuple of latitude and longitude
+        loc_idx : tuple of latitude and longitude indices
 
     Outputs
         tseries_list : list of tseries for 2007 - 2013
@@ -181,23 +181,24 @@ def create_tseries(wtk, loc):
     tseries_list = []
 
     for i in time_slices:
-        t = dset[min(i):max(i) + 1, loc[0], loc[1]]
+        t = dset[min(i):max(i) + 1, loc_idx[0], loc_idx[1]]
         tseries_list.append(t)
 
     return tseries_list
 
 
-def aeo_average(wtk, loc):
+def aeo_average(wtk, loc_idx):
     '''
     This function creates the average over all 7 years of wind energy.
 
     Inputs
         tseries_list : list of time series
+        loc_idx : tuple of latitude longitude indices
 
     Outputs
         average : average energy over 7 years (MWh)
     '''
-    tseries_list = create_tseries(wtk, loc)
+    tseries_list = create_tseries(wtk, loc_idx)
     averages = []
 
     for i in tseries_list:
