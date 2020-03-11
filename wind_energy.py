@@ -8,18 +8,17 @@ from reliability.Fitters import Fit_Weibull_2P  # for weibull_coeff
 
 
 def power_eff(wind_sp):
-    """ Creates turbine wind speed (x) vs power effiency (y) curve based on
-    curve from DOI: 10.1016/j.esd.2016.11.001. Outputs y for a given x.
+    '''
+    This function creates a turbine wind speed (x) vs power effiency (y) 
+    curve based on curve from DOI: 10.1016/j.esd.2016.11.001. It outputs Cp for
+    a given wind speed.
 
-    Parameters
-    ----------
-    wind_sp: int or float. single wind speed value.
+    Inputs
+        wind_sp: float. single wind speed value.
 
-    Return
-    ----------
-    Cp: int or float. power efficiency value based on inputted wind
-    speed
-    """
+    Outputs
+        Cp: float. power efficiency value.
+    '''
     x = list(np.arange(3, 26.0, 1))
     y = [0.26, 0.35, 0.4, 0.41, 0.425, 0.445, 0.445, 0.425, 0.38, 0.335, 0.28,
          0.23, 0.19, 0.16, 0.13, 0.11, 0.09, 0.075, 0.065, 0.05, 0.04, 0.03,
@@ -32,22 +31,20 @@ def power_eff(wind_sp):
 
 
 def weibull_coeff(tseries):
-    """ Fits a time series (month, year, decade) of wind speed data with a
+    '''
+    This function fits a time series of wind speed data with a
     Weibull distribution and returns shape (k) and scale (c) parameter.
-    These are needed to calculat the Weibull PDF.
+    These are used to calculate the Weibull PDF.
 
-    Parameters
-    ----------
-    tseries: list, array-like. distrubtion of wind speeds over a given period
-    of time.
+    Inputs
+        tseries: array-like. distrubtion of wind speeds.
 
-    Return
-    ----------
-    k: float. shape parameter, describes the Weibull slope in a probability
-    plot.
-    c: float. scale parameter, describes height and width of the Weibull
-    PDF.
-    """
+    Outputs
+        k: float. shape parameter, describes the Weibull slope in a probability
+        plot.
+        c: float. scale parameter, describes height and width of the Weibull
+        PDF.
+    '''
     data = list(tseries)
     wb = Fit_Weibull_2P(failures=data, show_probability_plot=False,
                         print_results=False)
@@ -58,43 +55,40 @@ def weibull_coeff(tseries):
 
 
 def weibull_pdf(wind_sp, k, c):
-    """ Computes the PDF for a Weibull distribution at a given wind speed,
-    with shape and scale parameters calculated from the distrubtion fit.
+    ''' This function computes the PDF for a Weibull distribution at a given
+    wind speed, with shape and scale parameters calculated from the distrubtion
+    fit.
 
-    Parameters
-    ----------
-    wind_sp: int or float. single windspeed value.
-    k: float. shape parameter, describes the Weibull slope in a probability
-    plot.
-    c: float. scale parameter, describes height and width of the Weibull
-    PDF.
+    Inputs
+        wind_sp: float. single windspeed value.
+        k: float. shape parameter, describes the Weibull slope in a probability
+        plot.
+        c: float. scale parameter, describes height and width of the Weibull
+        PDF.
 
-    Return
-    ----------
-    pdf: int or float. frequency of occurance of an inputted wind speed.
-    """
+    Outputs
+        pdf: float. frequency of occurance of an inputted wind speed.
+    '''
     pdf = (k/c)*(wind_sp/c)**(k-1)*math.exp(-(wind_sp/c)**k)
 
     return pdf
 
 
 def summation(tseries):
-    """ Sums Cp*wind speed^3* pdf for a range of windspeeds. Prevents
-    wind speeds that are too low and too high for wind turbine operation from
-    being used to calculate total energy output of wind turbine. Prevents
+    '''
+    This function sums Cp*wind speed^3* pdf for a range of windspeeds. It
+    also prevents wind speeds that are out of range for wind turbine operation
+    from being used to calculate total energy output of wind turbine. Prevents
     powers over the nameplate capacity (max power turbine can intake) from
     being computed.
 
-    Parameters
-    ----------
-    tseries: list, array-like. distrubtion of wind speeds over a given period
-    of time.
+    Inputs
+        tseries: array-like. distrubtion of wind speeds.
 
-    Return
-    ----------
-    tot_sum: sum of Cp*wind speed^3* pdf over a range of windspeeds, from the
-    min to max of the wind speed series.
-    """
+    Outputs
+        tot_sum: sum of (Cp*wind speed^3* pdf) over a range from the min to
+        max of the wind speed series.
+    '''
     summ_list = []
     k, c = weibull_coeff(tseries)
 
@@ -127,18 +121,16 @@ def summation(tseries):
 
 
 def wind_energy_output(tseries):
-    """ Calculates Mega Watt Hours (MWh) per year or Annual Energy Output
-    (AEO) of a wind turbine for a given time series of wind data.
+    '''
+    This function calculates Mega Watt Hours (MWh) per year or Annual
+    Energy Output (AEO) of a wind turbine.
 
-    Parameters
-    ----------
-    tseries: list, array-like. distrubtion of wind speeds over a given period
-    of time.
+    Inputs
+        tseries: array-like. distrubtion of wind speeds.
 
-    Return
-    ----------
-    aeo_mwh: annual energy output in MWh.
-    """
+    Outputs
+        aeo_mwh: annual energy output in MWh.
+    '''
     summ = summation(tseries)
 
     rho = 1.225  # air density
