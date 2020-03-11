@@ -1,5 +1,5 @@
 import os
-import planitapp
+from PlanIt import planitapp
 
 
 if __name__ == "__planitapp__":
