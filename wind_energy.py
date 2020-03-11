@@ -9,7 +9,7 @@ from reliability.Fitters import Fit_Weibull_2P  # for weibull_coeff
 
 def power_eff(wind_sp):
     '''
-    This function creates a turbine wind speed (x) vs power effiency (y) 
+    This function creates a turbine wind speed (x) vs power effiency (y)
     curve based on curve from DOI: 10.1016/j.esd.2016.11.001. It outputs Cp for
     a given wind speed.
 
@@ -175,7 +175,7 @@ def create_tseries(wtk, loc):
     twenty13 = dt.loc[(dt.datetime >= '2013-01-01') &
                       (dt.datetime < '2014-01-01')].index
 
-    time_slices = [twent07, twenty08, twenty09, twenty10, twenty11, twenty12,
+    time_slices = [twenty07, twenty08, twenty09, twenty10, twenty11, twenty12,
                    twenty13]
 
     tseries_list = []
