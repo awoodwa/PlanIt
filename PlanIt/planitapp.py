@@ -1,4 +1,4 @@
-from flask import request, url_for, render_template, redirect, flash
+from flask import Flask, request, url_for, render_template, redirect, flash
 #from PlanIt import form, form_gov, form_res, build_hscfg, homepage_map, location_handling, app 
 from form import InputData
 from form_res import InputData_res
@@ -15,7 +15,7 @@ app.config.from_object("config.Config")
 
 @app.route("/")
 def home():
-    homepage_map.states()
+    #homepage_map.states()
     return render_template("home.html")
 
 
