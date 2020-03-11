@@ -42,6 +42,7 @@ def wtk_locator(wtk, loc):
 
     min_dist = math.inf
     nearest_wtk = ()
+    index = (0, 0)
 
     for i in range(c.shape[1]):
         for j in range(c.shape[0]):
@@ -50,10 +51,11 @@ def wtk_locator(wtk, loc):
             if dist < min_dist:
                 min_dist = dist
                 nearest_wtk = check
+                index = (i, j)
             else:
                 pass
 
-    return nearest_wtk
+    return [nearest_wtk, index]
 
 
 def get_pop(location):
