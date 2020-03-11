@@ -209,20 +209,21 @@ def aeo_average(wtk, loc_idx):
     return average
 
 
-def wind_landuse(land_available, tseries_list):
+def wind_landuse(land_available, wtk, loc_idx):
     '''
     This function calculates the maximum power output achieved by wind
     energy alone in a given location with given land availability.
 
     Inputs
         land_available : float of land free user input in km^2
-        tseries_list : output of create_tseries; list of time series
+        wtk : h5pyd file
+        loc_idx : index of lat and long in dataset
 
     Outputs
         max_energy_output : max power to be harvested in land area (MWh)
     '''
     # 0.4 km^2/turbine approximately
     num_turbines = land_available / 0.4
-    max_power_output = num_turbines * (aeo_average(tseries_list))
+    max_power_output = num_turbines * (aeo_average(wtk, loc_idx))
 
     return max_energy_output
