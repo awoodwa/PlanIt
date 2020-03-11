@@ -44,14 +44,14 @@ def wtk_locator(wtk, loc):
     nearest_wtk = ()
     index = (0, 0)
 
-    for i in range(c.shape[1]):
-        for j in range(c.shape[0]):
-            check = tuple(c[i][j])
+    for i in range(c.shape[0]):
+        for j in range(c.shape[1]):
+            check = c[i][j]
             dist = ((check[0]-loc[0])**2 +(check[1]-loc[1])**2)
             if dist < min_dist:
                 min_dist = dist
                 nearest_wtk = check
-                index = (j, i)
+                index = (i, j)
             else:
                 pass
 
