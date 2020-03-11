@@ -55,7 +55,7 @@ def wtk_locator(wtk, loc):
             else:
                 pass
 
-    return [nearest_wtk, index]
+    return index
 
 
 def get_pop(location):
