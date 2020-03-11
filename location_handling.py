@@ -37,6 +37,9 @@ def wtk_locator(wtk, location):
 
     Outputs
         tuple(reversed(ij)) : tuple of latitude and longitude indices
+
+    Sources: Lamber Conformal Conic function from pyproj module.
+             https://proj.org/operations/projections/lcc.html
     '''
     coordinates = wtk['coordinates']
     projectLcc = Proj('+proj=lcc +lat_1=30 +lat_2=60 \
