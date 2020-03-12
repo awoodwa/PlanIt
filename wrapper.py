@@ -75,7 +75,7 @@ def wrapper(wtk, city, state, land_available, goal = 100, residential = False,\
         energy_use = pop * gov_per_cap
         energy_goal = (goal/100) * energy_use
 
-        wind = wind_energy.wind_landuse(land_availabe, dataset_loc)
+        wind = wind_energy.wind_landuse(land_available, dataset_loc)
         turbines = round(land_available / 0.4)
         wind_cost = cost_handling.cost_of_wind(turbines)
 
