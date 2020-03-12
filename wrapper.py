@@ -5,7 +5,7 @@ This is the wrapper module!
 import location_handling
 import energy_use_handling
 import wind_energy
-import solar_handling
+import solar_handeling
 
 import pandas as pd
 import numpy as np
