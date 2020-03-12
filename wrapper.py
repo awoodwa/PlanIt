@@ -6,6 +6,7 @@ import location_handling
 import energy_use_handling
 import wind_energy
 import solar_handeling
+import cost_handling
 
 import pandas as pd
 import numpy as np
