@@ -103,7 +103,7 @@ def wrapper(wtk, city, state, land_available, goal = 100, residential = False,\
         y = np.linspace(turbines, 0, round(panels/100000))
         limit = pd.DataFrame({'x':x, 'y':y})
 
-        p, t, = np.meshgrid(range(0, round(panels/100000), range(0, turbines)))
+        p, t = np.meshgrid(range(0, round(panels/100000)), range(0, turbines))
         e = (p*100000*solar_raw/1e6) + (t*wind)
         c = (cost_handling.cost_of_wind(t) +\
                 cost_handling.cost_of_solar(p * 100000))/1000000
