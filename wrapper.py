@@ -9,6 +9,7 @@ import solar_handling
 
 import pandas as pd
 import numpy as np
+import altair as alt
 
 # wtk = h5pyd.File('nrel/wtk-us.h5', 'r')
 
