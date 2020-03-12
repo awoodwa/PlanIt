@@ -9,6 +9,7 @@ def cost_of_wind(turbines):
     Outputs
         cost : float value of dollars
     '''
+    # 1 turbine costs approximately 1.3 M USD
     cost = turbines * 1.3e6
     return cost
 
@@ -24,7 +25,8 @@ def cost_of_solar(annual_solar_mean):
     Outputs
         cost : float in USD
     '''
-    daily_solar = 1000 * annual_solar_mean / 8760 # daily solar power in W
+    # solar cost is calculated by kW
+    daily_solar = 1000 * annual_solar_mean / 8760  # daily solar power in W
     cost = 3.14 * daily_solar
 
     return cost

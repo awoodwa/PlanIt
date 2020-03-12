@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import math
 from pyproj import Proj
 
 
@@ -16,8 +15,10 @@ def get_loc(city, state):
     Outputs
         loc : tuple of latitude and longitude values
     '''
+    # directory contains latitude and longitude for US cities
     directory = pd.read_csv('uscities_edit.csv')
 
+    # find our user's input latitude and longitude
     row = directory.loc[(directory['state_id'] == state) &
                         (directory['city'] == city)]
 
@@ -41,12 +42,15 @@ def wtk_locator(wtk, location):
     Sources: Lamber Conformal Conic function from pyproj module.
              https://proj.org/operations/projections/lcc.html
     '''
+    # load the coordinates from the h5pyd dataset
     coordinates = wtk['coordinates']
+    # project using the Lamber Conformal Conic function
     projectLcc = Proj('+proj=lcc +lat_1=30 +lat_2=60 \
                     +lat_0=38.47240422490422 +lon_0=-96.0 \
                     +x_0=0 +y_0=0 +ellps=sphere \
                     +units=m +no_defs')
 
+    # set our origin (reversed because NREL and pyproj don't match)
     x_origin, y_origin = reversed(coordinates[0][0])
     origin = projectLcc(x_origin, y_origin)
 
@@ -55,6 +59,7 @@ def wtk_locator(wtk, location):
 
     coords = projectLcc(lon, lat)
 
+    # find difference between origin and where we are
     delta = np.subtract(coords, origin)
 
     ij = [int(round(x/2000)) for x in delta]
@@ -73,7 +78,7 @@ def get_pop(location):
     Outputs
         population : integer
     '''
-
+    # grab the population from our same US cities directory
     directory = pd.read_csv('uscities_edit.csv')
     lat = location[0]
     lng = location[1]
