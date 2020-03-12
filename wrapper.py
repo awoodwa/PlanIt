@@ -71,21 +71,20 @@ def wrapper(wtk, city, state, land_available, goal = 100, residential = False,\
 
     else:
         # default setting is for government use - grab estimate of energy use
-        gov_per_cap = energy_use_handling.get_tot_energy_per_cap(state)
+        gov_per_cap = energy_use_handling.get_tot_energy_per_cap('OR')
         energy_use = pop * gov_per_cap
         energy_goal = (goal/100) * energy_use
 
-        wind = wind_energy.wind_landuse(land_available, dataset_loc)
+        wind = wind_energy.wind_landuse(land_available, wtk, data_location)
         turbines = round(land_available / 0.4)
         wind_cost = cost_handling.cost_of_wind(turbines)
 
-        solar_raw = solar_handeling.annual_solar_mean(wtk, dataset_loc)
+        solar_raw = solar_handeling.annual_solar_mean(wtk, data_location)
         panels = round(land_available * 1e6 / 1.635481)
         solar = panels * solar_raw
         solar_cost = cost_handling.cost_of_solar(solar_raw) * panels
 
         solar_panels = []
-
         for p in range(round(panels/100000)):
             wind_turbines = []
             for t in range(turbines):
