@@ -50,7 +50,7 @@ def wrapper(wtk, city, state, land_available, goal = 100, residential = False,\
             energy_goal = (goal/100) * energy_use
         # otherwise it defaults to an estimate
         else:
-            res_per_cap = energy_use_handling.energy_use_per_cap_res(state)
+            res_per_cap = energy_use_handling.get_res_energy_per_cap(state)
             energy_use = household_size * res_per_cap
             energy_goal = (goal/100) * energy_use
 
@@ -71,7 +71,7 @@ def wrapper(wtk, city, state, land_available, goal = 100, residential = False,\
 
     else:
         # default setting is for government use - grab estimate of energy use
-        gov_per_cap = energy_use_handling.energy_use_per_cap_tot(state)
+        gov_per_cap = energy_use_handling.get_tot_energy_per_cap(state)
         energy_use = pop * gov_per_cap
         energy_goal = (goal/100) * energy_use
 
