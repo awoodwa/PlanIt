@@ -75,11 +75,11 @@ def wrapper(wtk, city, state, land_available, goal = 100, residential = False,\
         energy_use = pop * gov_per_cap
         energy_goal = (goal/100) * energy_use
 
-        wind = wind_energy.wind_landuse(land_available, wtk, data_location)
+        wind = wind_energy.wind_landuse(land_available, wtk, dataset_loc)
         turbines = round(land_available / 0.4)
         wind_cost = cost_handling.cost_of_wind(turbines)
 
-        solar_raw = solar_handeling.annual_solar_mean(wtk, data_location)
+        solar_raw = solar_handeling.annual_solar_mean(wtk, dataset_loc)
         panels = round(land_available * 1e6 / 1.635481)
         solar = panels * solar_raw
         solar_cost = cost_handling.cost_of_solar(solar_raw) * panels
