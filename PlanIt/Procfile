@@ -1,1 +1,1 @@
-web: gunicorn Planit:planitapp
+web: gunicorn planitapp:app
