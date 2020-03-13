@@ -2,7 +2,7 @@
 
 ## What would Al Gore do?
 
-The world is on fire, and we want to as you: WWAGD? Whether you're a resident or a representative, use PlanIt to start your journey of green technology discovery. There's a lot of information out here and we want to help you interpret it.
+The world is on fire, and we want to ask you: WWAGD? Whether you're a resident or a representative, use PlanIt to start your journey of green technology discovery. There's a lot of information out here and we want to help you interpret it.
 
 ### Getting Started:
 
