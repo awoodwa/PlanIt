@@ -61,9 +61,10 @@ def wrapper(wtk, city, state, land_available, goal=100, residential=False,
         cost = round(cost_handling.cost_of_solar(solar) * panels, 2)
         energy_output = round(panels * solar, 2)
 
+        # ~25 panels can fit on the average room
         cost_25 = round(cost_handling.cost_of_solar(solar) * 25, 2)
         energy_output_25 = round(25 * solar, 2)
-        energy_saved = round(energy_use - energy_output_25, 2)
+        energy_saved = round((energy_output_25/energy_use)*100, 2)
 
         return [energy_output, panels, cost, energy_output_25,
                 energy_saved, cost_25]
