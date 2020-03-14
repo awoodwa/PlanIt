@@ -2,7 +2,7 @@
 
 ## What would Al Gore do?
 
-The world is on fire, and we want to ask you: WWAGD? Whether you're a resident or a representative, use PlanIt to start your journey of green technology discovery. There's a lot of information out here and we want to help you interpret it.
+The world is on fire, and we want to ask you: WWAGD? Whether you're a resident or a representative, use PlanIt to start your journey of green technology discovery. There's a lot of information out there and we want to help you interpret it.
 
 ### Getting Started:
 
@@ -41,7 +41,7 @@ Next, we want to know how big your household is. Single residents to community l
 
 You can optionally input your monthly energy usage in kWh. This can be found on your latest electricity bill. We ask that you ensure this value is for a single month's use (not two months or longer). This will make our prediction more accurate for your situation. However, if you cannot provide that at this time or if you're just exploring, we will estimate your residential energy use ourselves!
 
-Another optional input is your energy goal percentage. We will assume you want to convert 100% of your energy use to be sourced from renewables, but we know that that's not always realistic! Feel free to input anywhere from 1-99%.
+Another optional input is your energy goal percentage. We will assume you want to convert 100% of your energy use to be sourced from renewables, but we know that that's not always realistic! Feel free to input anywhere from 1-100%.
 
 Finally, you're required to input your API key you received from the NREL website.
 
@@ -49,4 +49,4 @@ The results page will detail our expected energy output covered by renewables, h
 
 ### Thank you for using PlanIt!
 
-[Not Okay Meme](/PlanIt/static/not_okay_meme.png)
+[Not Okay Meme](PlanIt/static/not_okay_meme.png)
