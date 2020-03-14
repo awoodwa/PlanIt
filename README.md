@@ -48,3 +48,5 @@ Finally, you're required to input your API key you received from the NREL websit
 The results page will detail our expected energy output covered by renewables, how many solar panels we recommend you install, and the cost of that installation. However, we know that number of solar panels and cost can be prohibitive! From our research, an average rooftop can accommodate 25 solar panels. With this in mind, we also provide how much energy 25 panels would provide in your area, what percentage of your energy conversion goal that achieves, and the cost of that installation.
 
 ### Thank you for using PlanIt!
+
+[Not Okay Meme](/PlanIt/static/not_okay_meme.png)
