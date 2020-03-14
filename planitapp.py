@@ -42,12 +42,10 @@ def form_gov():
             collected_data.append("Government")
             collected_data.append(request.form.get("state"))
             collected_data.append(request.form.get("location"))
-            collected_data.append(request.form.get("monthly_eng"))
-            collected_data.append(request.form.get("renewable"))
             collected_data.append(request.form.get("land_ava"))
             collected_data.append(request.form.get("api_key"))
             # run "build_config.py" to build file for accessing NREL data
-            build_hscfg.config_file(collected_data[5])
+            build_hscfg.config_file(collected_data[4])
 
             loc_handling = location_handling.get_loc(
                 collected_data[2], collected_data[1])
@@ -71,11 +69,9 @@ def form_res():
             collected_data.append(request.form.get("state"))
             collected_data.append(request.form.get("location"))
             collected_data.append(request.form.get("household"))
-            collected_data.append(request.form.get("monthly_eng"))
-            collected_data.append(request.form.get("renewable"))
             collected_data.append(request.form.get("api_key"))
             # run "build_config.py" to build file for accessing NREL data
-            build_hscfg.config_file(collected_data[6])
+            build_hscfg.config_file(collected_data[4])
             loc_handling = location_handling.get_loc(
                 collected_data[2], collected_data[1])
             message = loc_handling  # "config file has been built"

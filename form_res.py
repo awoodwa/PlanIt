@@ -18,10 +18,6 @@ class InputData_res(FlaskForm):
         "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
     state = wtforms.SelectField("*State: ",
      choices=[(state, state) for state in state_abbrev])
-    household = wtforms.StringField("*Household Size: ", [DataRequired()])
-    monthly_eng = wtforms.StringField(
-        "*Monthly Energy Usage (kWh): ", [DataRequired()])
-    renewable = wtforms.StringField(
-        "Goal Percentage of Energy from Renewables: ")
+    household = wtforms.IntegerField("*Household Size: ", [DataRequired()])
     api_key = wtforms.StringField("*API Key: ", [DataRequired()])
     submit = wtforms.SubmitField("Submit")
