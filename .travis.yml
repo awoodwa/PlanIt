@@ -1,1 +1,33 @@
+# what language the app is built on
 language: python
+
+# what version to use
+python:
+  - 3.6
+  - 3.5
+  - 2.7
+
+# what branches to test
+branches:
+  only:
+    - master
+
+# setup environment
+install:
+  - pip install coverage
+  - pip install coveralls
+  - pip install flake8
+  - pip install -r requiresments.txt
+
+# run before testing unit tests
+before_script:
+  - 'flake8 PlanIt'
+
+# run the unit tests
+script:
+  - coverate run -m unittest discover
+
+# generate coverage report
+after_success:
+  - coverage report
+  - coveralls
