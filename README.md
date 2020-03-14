@@ -49,4 +49,4 @@ The results page will detail our expected energy output covered by renewables, h
 
 ### Thank you for using PlanIt!
 
-[Not Okay Meme](https://github.com/awoodwa/PlanIt/blob/master/PlanIt/static/not_okay_meme.PNG)
+![Not Okay Meme](https://github.com/awoodwa/PlanIt/blob/master/PlanIt/static/not_okay_meme.PNG)
