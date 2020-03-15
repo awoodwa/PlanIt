@@ -125,10 +125,10 @@ def wrapper(wtk, city, state, land_available, goal=100, residential=False,
         layer_chart = alt.layer(
             chart, line).configure_axis(
                 grid=False,
-                labelFontSize=20,  
-                titleFontSize=25,  
-                labelFont="Times New Roman", 
-                titleFont="Times New Roman",         
+                labelFontSize=20,
+                titleFontSize=25,
+                labelFont="Times New Roman",
+                titleFont="Times New Roman",
             ).properties(
                 background='none',
                 width=1000,
@@ -139,6 +139,6 @@ def wrapper(wtk, city, state, land_available, goal=100, residential=False,
                 labelFont="Times New Roman",
                 titleFont="Times New Roman",
             )
-        layer_chart.save('templates/gov_chart.html', embed_options={'renderer': 'svg'})
+        layer_chart.save(
+            'templates/gov_chart.html', embed_options={'renderer': 'svg'})
         return "chart"
-
