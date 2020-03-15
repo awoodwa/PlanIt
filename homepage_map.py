@@ -1,35 +1,50 @@
-import altair as alt
+import altair
 import pandas as pd
-from vega_datasets import data 
+from vega_datasets import data
+
+# Used to build homepage map, this should not run multiple times
+altair.themes.enable("dark")
 
 csv = pd.read_csv("capital_city_energies.csv")
-states = alt.topo_feature(data.us_10m.url, feature="states") #csv["State"]
+states = altair.topo_feature(data.us_10m.url, feature="states")
 
-csv["Total Energy (kWh)"] = csv["Wind Energy (MWh)"] * 1000 + csv["Solar Energy (kWh)"]
+csv["Total Energy (kWh)"] = csv["Wind Energy (MWh)"] * 1000
++ csv["Solar Energy (kWh)"]
 csv = csv.round(0)
 
 
-background = alt.Chart(states).mark_geoshape(
+background = altair.Chart(states).mark_geoshape(
     fill="black",
     stroke="white",
     ).properties(
-        width=800,
-        height=500
+        width=1300,
+        height=750
     ).project("albersUsa")
-points = alt.Chart(csv).mark_circle(
+points = altair.Chart(csv).mark_circle(
     color='red',
     size=50,
     opacity=0.6,
     ).encode(
     longitude='Longitude:Q',
     latitude='Latitude:Q',
-    #wind='Wind Energy (MWh):Q',
-    #solar='Solar Energy(kWh):Q',
-    #size=alt.Size("Total Energy (kWh):Q", title = "Total Energy (kWh)"),
-    #color=alt.value('red'),    
-    #opacity=alt.value(0.6),
-    tooltip=['State:N', 'Capital:N', 'Wind Energy (MWh):N', 'Solar Energy (kWh):N', 'Total Energy (kWh):N'],
+    size=altair.Size("Total Energy (kWh):Q", title="Total Energy (kWh)"),
+    color="Total Energy (kWh):Q",
+    opacity=altair.value(0.6),
+    tooltip=[
+        'State:N', 'Capital:N', 'Wind Energy (MWh):N',
+        'Solar Energy (kWh):N', 'Total Energy (kWh):N'],
     )
-chart = (background + points)
+chart = altair.layer(
+    background, points
+    ).configure_legend(
+    labelFontSize=15,
+    titleFontSize=15,
+    labelFont="Times New Roman",
+    titleFont="Times New Roman",
+    ).properties(
+    background="none"
+    ).configure_view(
+    strokeOpacity=0
+    )
 chart.save('templates/energy.html', embed_options={'renderer': 'svg'})
 chart

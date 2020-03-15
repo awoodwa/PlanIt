@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        body {
+            background-image: url(static/visualization.png);
+            background-repeat: no-repeat; 
+            background-size: cover;
+        }
+    </style>
+    <li><a href="{{ url_for("home") }}">Home</a></li>
     <head></head>
-    <body class="{{template}}">
-        <div class="formwrapper">
-            <h2 class="title">Build your PlanIt: </h2>
-            <form method="POST" action="/">
-                <div class="form-field">{{ form.user_type.label }}{{ form.user_type }}</div>
-                <div class="form-field">{{ form.location.label }}{{ form.location }}</div>
-                <div class="form-field">{{ form.monthly_eng.label }}{{ form.monthly_eng }}</div>
-                <div class="form-field">{{ form.renewable.label }}{{ form.renewable }}</div>
-                <div class="form-field">{{ form.api_key.label }}{{ form.api_key }}</div>
-                {{form.submit}}
+    <body>
+        <div class="formwrapper" >
+            <h2 class="title" style="color: white;">Build your PlanIt: </h2>
+            <form method="POST">
+                <div class="form-field" style="color: white;">{{ form.user_type.label }}{{ form.user_type }}</div>
+                <div >{{form.submit}}</div>
+                
             </form>
         </div>
+       
     </body>
 </html>
 

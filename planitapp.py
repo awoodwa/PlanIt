@@ -1,12 +1,10 @@
 from flask import Flask, request, url_for, render_template, redirect, flash
-#from PlanIt import form, form_gov, form_res, build_hscfg, homepage_map, location_handling, app 
 from form import InputData
 from form_res import InputData_res
 from form_gov import InputData_gov
-from app import app, pages, freezer
-import build_hscfg  # functions must be in "application" directory
-import homepage_map
-import location_handling
+import build_hscfg
+import h5pyd
+import wrapper
 
 
 app = Flask(__name__, instance_relative_config=False)
@@ -15,7 +13,6 @@ app.config.from_object("config.Config")
 
 @app.route("/")
 def home():
-    #homepage_map.states()
     return render_template("home.html")
 
 
@@ -32,13 +29,13 @@ def form():
             return redirect(url_for("form_res"))
     return render_template("form.html", form=form)
 
+
 @app.route("/gov", methods=("GET", "POST"))
 def form_gov():
     collected_data = []
     form_gov = InputData_gov()
     if request.method == "POST":
         try:
-        # collect input data to use in functions
             collected_data.append("Government")
             collected_data.append(request.form.get("state"))
             collected_data.append(request.form.get("location"))
@@ -46,17 +43,23 @@ def form_gov():
             collected_data.append(request.form.get("api_key"))
             # run "build_config.py" to build file for accessing NREL data
             build_hscfg.config_file(collected_data[4])
-
-            loc_handling = location_handling.get_loc(
-                collected_data[2], collected_data[1])
-            #if loc_handling == len(0)
-            message = loc_handling  # "config file has been built"
-            return redirect(url_for("results_gov", gov_results=message))
+            # input data to wrapper function
+            wtk = h5pyd.File("/nrel/wtk-us.h5", "r")
+            results = wrapper.wrapper(
+                wtk, collected_data[2], collected_data[1],
+                float(collected_data[3]))
+            return redirect(url_for("results_gov", gov_results=results))
         except IndexError:
-            flash("ERROR 'City/Town' spelling or try a nearby city")
-            #return redirect(url_for("form_res"))
+            flash("ERROR: Check spelling of 'City/Town' or try a nearby city")
+            return render_template("form_gov.html", form_gov=form_gov)
+        except OSError:
+            flash("ERROR: API key not accepted")
+            return render_template("form_gov.html", form_gov=form_gov)
+        except ValueError:
+            flash("Error: Land available must be a number")
             return render_template("form_gov.html", form_gov=form_gov)
     return render_template("form_gov.html", form_gov=form_gov)
+
 
 @app.route("/res", methods=("GET", "POST"))
 def form_res():
@@ -69,30 +72,59 @@ def form_res():
             collected_data.append(request.form.get("state"))
             collected_data.append(request.form.get("location"))
             collected_data.append(request.form.get("household"))
+            collected_data.append(request.form.get("energy_bill"))
             collected_data.append(request.form.get("api_key"))
+            print(collected_data)
             # run "build_config.py" to build file for accessing NREL data
-            build_hscfg.config_file(collected_data[4])
-            loc_handling = location_handling.get_loc(
-                collected_data[2], collected_data[1])
-            message = loc_handling  # "config file has been built"
-            return redirect(url_for("results_res", res_results=message))
+            build_hscfg.config_file(collected_data[5])
+
+            # input data to wrapper function
+            wtk = h5pyd.File("/nrel/wtk-us.h5", "r")
+            if collected_data[4] == '':
+                results = wrapper.wrapper(
+                    wtk, collected_data[2], collected_data[1],
+                    100000, residential=True,
+                    household_size=int(collected_data[3]))
+            else:
+                results = wrapper.wrapper(
+                    wtk, collected_data[2], collected_data[1],
+                    100000, residential=True,
+                    energy_bill=int(collected_data[4]),
+                    household_size=int(collected_data[3]))
+            return redirect(url_for("results_res", res_results=results))
         except IndexError:
-            flash("ERROR 'City/Town' spelling or try a nearby city")
-            #return redirect(url_for("form_res"))
+            flash("ERROR: Check spelling of 'City/Town' or try a nearby city")
+            return render_template("form_res.html", form_res=form_res)
+        except OSError:
+            flash("ERROR: API key not accepted")
             return render_template("form_res.html", form_res=form_res)
     return render_template("form_res.html", form_res=form_res)
 
 
 @app.route("/results_res/<res_results>")
 def results_res(res_results):
-    result = res_results
-    return render_template("results_res.html", result=result)
+    result0 = res_results
+    res_results = res_results.replace("[", " ")
+    res_results = res_results.replace("]", " ")
+    result0 = list(res_results.split(","))
+    return render_template("results_res.html", result0=result0)
 
 
 @app.route("/results_gov/<gov_results>")
 def results_gov(gov_results):
-    result = gov_results
-    return render_template("results_gov.html", result=result)
+    gov_results = gov_results.replace("[", " ")
+    gov_results = gov_results.replace("]", " ")
+    return render_template("results_gov.html", chart="gov_chart")
+
+
+@app.route("/results_gov/")
+def gov_chart():
+    return render_template("gov_chart.html")
+
+
+@app.route("/home_map/")
+def home_map():
+    return render_template("energy.html")
 
 
 @app.route("/about")
@@ -102,6 +134,3 @@ def about():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-       

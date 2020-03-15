@@ -1,6 +1,5 @@
 """ Application configuration """
-#from os import environ
-#import redis
+
 import os
 
 

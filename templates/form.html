@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        body {
+            background-color: black;
+            background-repeat: no-repeat; 
+            background-size: cover;
+        }
+    </style>
     <li><a href="{{ url_for("home") }}">Home</a></li>
     <head></head>
-    <body class="{{template}}" style="background-color: black;">
+    <body>
         <div class="formwrapper" >
-            <h2 class="title" style="color: honeydew;">Build your PlanIt: </h2>
-            <form method="POST" style="background-color: black;">
-                <div class="form-field" style="color: ivory;">{{ form.user_type.label }}{{ form.user_type }}</div>
+            <h2 class="title" style="color: white;">Build your PlanIt: </h2>
+            <form method="POST">
+                <div class="form-field" style="color: white;">{{ form.user_type.label }}{{ form.user_type }}</div>
                 <div >{{form.submit}}</div>
                 
             </form>
         </div>
-       <img align="right" src="static/Picture1.jpg"/>
+       
     </body>
 </html>
 

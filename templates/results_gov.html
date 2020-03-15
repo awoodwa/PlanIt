@@ -24,40 +24,7 @@
     <body>
         <div>
             <h1>Suggested PlanIt</h1>
-            <table style="width:100%">
-                <tr>
-                    <td style="text-align: right;">Number of Solar Panels: </td>
-                    <td>{{ result }}</td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Energy Produced from Solar Panels: </td>
-                    <td>{{ result }}</td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Cost of Solar Panels: </td>
-                    <td>{{ result }}</td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Number of Wind Turbines: </td>
-                    <td>{{ result }}</td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Energy Produced from Wind Turbines: </td>
-                    <td>{{ result }}</td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Cost of Wind Turbines: </td>
-                    <td>{{ result }}</td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Total Energy Produced from Renewables: </td>
-                    <td>{{ result }}</td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Total Cost of Implementing Renewables: </td>
-                    <td>{{ result }}</td>
-                </tr>
-            </table>
+            <iframe style="width:100%; height:800px; border:none;" src="{{ url_for("gov_chart") }}"></iframe>
             
         </div>
     </body>
