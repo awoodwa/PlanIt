@@ -1,5 +1,4 @@
 import math
-import h5pyd
 import dateutil
 import numpy as np
 import pandas as pd
@@ -99,8 +98,8 @@ def summation(tseries):
 
         tot_sp = Cp * wind_sp**3
         max_sp = 378  # max wind speed (for max power of turbine) for the
-                     # rho and A from turbine specs is 378
-                     # 2430 kW = 0.5 * rho * A * Cp * v^3
+        # rho and A from turbine specs is 378
+        # 2430 kW = 0.5 * rho * A * Cp * v^3
 
         # wind must be between 3.5 and 25 m/s for turbine operation
         if wind_sp < 3.5 or wind_sp > 25.0:
@@ -142,6 +141,7 @@ def wind_energy_output(tseries):
 
     return aeo_mwh
 
+
 def create_tseries(wtk, loc_idx):
     '''
     Creates a list of time series for inputs in other functions.
@@ -157,7 +157,7 @@ def create_tseries(wtk, loc_idx):
     dset = wtk['windspeed_100m']
 
     dt = wtk['datetime']
-    dt = pd.DataFrame({'datetime':dt[:]}, index = range(0, dt.shape[0]))
+    dt = pd.DataFrame({'datetime': dt[:]}, index=range(0, dt.shape[0]))
     dt['datetime'] = dt['datetime'].apply(dateutil.parser.parse)
 
     twenty07 = dt.loc[(dt.datetime >= '2007-01-01') &
