@@ -1,1 +1,1 @@
-web: gunicorn planitapp:app
+web: gunicorn planitapp:app --timeout 600
