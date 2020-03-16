@@ -6,6 +6,10 @@
             background-repeat: no-repeat; 
             background-size: cover;
         }
+        div {
+            color: white;
+            font-size:15pt;
+        }
     </style>
     <li><a href="{{ url_for("home") }}">Home</a></li>
     <head></head>
@@ -17,15 +21,15 @@
             <h2 class="title" style="color: white;">Build your PlanIt: </h2>
             
             <form method="POST">                
-                <div class="form-field" style="color: ivory;">{{ form_gov.state.label }}{{ form_gov.state }}</div>
-                <div class="form-field" style="color: ivory;">{{ form_gov.location.label }}{{ form_gov.location }}</div>
-                <div class="form-field" style="color: ivory;">{{ form_gov.land_ava.label }}{{ form_gov.land_ava }}</div>
-                <div class="form-field" style="color: ivory;">{{ form_gov.goal_renewable.label }}{{ form_gov.goal_renewable }}</div>
-                <div class="form-field" style="color: ivory;">{{ form_gov.api_key.label }}{{ form_gov.api_key }}</div>
+                <p class="form-field"><b style="color:red">*</b>{{ form_gov.state.label }}{{ form_gov.state }}</p>
+                <p class="form-field"><b style="color:red">*</b>{{ form_gov.location.label }}{{ form_gov.location }}</p>
+                <p class="form-field"><b style="color:red">*</b>{{ form_gov.land_ava.label }}{{ form_gov.land_ava }}</p>
+                <p class="form-field">{{ form_gov.goal_renewable.label }}{{ form_gov.goal_renewable }}</p>
+                <p class="form-field"><b style="color:red">*</b>{{ form_gov.api_key.label }}{{ form_gov.api_key }}</p>
                 {{form_gov.submit}}
             </form>
         </div>
-        <p style="color: white">NOTE: Fields with a star must be completed</p>
+        <p style="color: white"><i>NOTE:</i> Fields with a <b style="color:red">*</b> must be completed</p>
     </body>
 </html>
 

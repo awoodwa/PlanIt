@@ -8,9 +8,23 @@
             }
             h1 {
                 color: white;
+                text-align: center;
+                font-size: 50px;
+            }
+            h2 {
+                color:lightslategrey;
+                text-align: left;
+                font-size: 35px;
+            }
+            h3 {
+                color:slategrey;
+                text-align: center;
+                font-size: 45px;
             }
             p {
                 color: white;
+                text-align: left;
+                font-size: 17px;
             }
             table, th, td {
                 color: white;
@@ -24,8 +38,22 @@
     <body>
         <div>
             <h1>Suggested PlanIt</h1>
+            
+            <p><b style="font-size: 30px; color:white">Understanding your results: </b></p>
+            <p>To view your results, hover the mouse pointer over various points on the chart.</p>
+            <p><u style="font-size: 20px; color:white">Variables:</u></p>
+            <p style="text-indent: 25px;"><i>Panel:</i> number of solar panels (x100,000) </p>
+            <p style="text-indent: 25px;"><i>Turbine:</i> number of wind turbines</p>
+            <p style="text-indent: 25px;"><i>PercentGoal: </i>by implementing the suggested number of solar panels and wind turbines, this is the percentage
+            of energy you can expected to be sourced from renewables</p>
+            <p style="text-indent: 25px;"><i>Cost:</i> projected cost of implementing the suggested number of solar panels and wind turbines in millions (USD)</p>
+            <p>Recall the red line indicates the limitation of land availability. Everything below and to the left of 
+                the red line is a viable option based off of the input you have provided.
+            </p>
             <iframe style="width:100%; height:800px; border:none;" src="{{ url_for("gov_chart") }}"></iframe>
             
         </div>
+        <h3>Thank you for using PlanIt!</h3>
     </body>
+    
 </html>

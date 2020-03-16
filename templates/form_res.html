@@ -6,6 +6,10 @@
             background-repeat: no-repeat; 
             background-size: cover;
         }
+        div {
+            color: white;
+            font-size: 15pt;
+        }
     </style>
     <li><a href="{{ url_for("home") }}">Home</a></li>
     <head></head>
@@ -17,17 +21,18 @@
             <h2 class="title" style="color: white;">Build your PlanIt: </h2>
             
             <form method="POST">               
-                <div class="form-field" style="color: ivory;">{{ form_res.state.label }}{{ form_res.state }}</div>
-                <div class="form-field" style="color: ivory;">{{ form_res.location.label }}{{ form_res.location }}</div>
-                <div class="form-field" style="color: ivory;">{{ form_res.household.label }}{{ form_res.household }}</div>
-                <div class="form-field" style="color: ivory;">{{ form_res.energy_bill.label }}{{ form_res.energy_bill }}</div>
-                <div class="form-field" style="color: ivory;">{{ form_res.goal_renewable.label }}{{ form_res.goal_renewable }}</div>
-                <div class="form-field" style="color: ivory;">{{ form_res.api_key.label }}{{ form_res.api_key }}</div>
+                <p class="form-field"><b style="color:red">*</b>{{ form_res.state.label }}{{ form_res.state }}</p>
+                <p class="form-field"><b style="color:red">*</b>{{ form_res.location.label }}{{ form_res.location }}</p>
+                <p class="form-field"><b style="color:red">*</b>{{ form_res.household.label }}{{ form_res.household }}</p>
+                <p class="form-field">{{ form_res.energy_bill.label }}{{ form_res.energy_bill }}</p>
+                <p class="form-field">{{ form_res.goal_renewable.label }}{{ form_res.goal_renewable }}</p>
+                <p class="form-field"><b style="color:red">*</b>{{ form_res.api_key.label }}{{ form_res.api_key }}</p>
                 {{form_res.submit}}
             </form>
         </div>
-        <p style="color: white">NOTE: Fields with a star must be completed</p>
+        <p style="color: white"><i>NOTE:</i> Fields with a <b style="color:red">*</b> must be completed</p>
     </body>
+
 </html>
 
 

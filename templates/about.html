@@ -17,11 +17,7 @@
             text-align: left;
             font-size: 35px;
         }
-        h3 {
-            color:slategrey;
-            text-align: center;
-            font-size: 45px;
-        }
+      
         i {
             color:rgb(196, 217, 241);
             text-align: left;
@@ -34,10 +30,15 @@
             font-size: 17px;
         }
         ul {
-        top: 0;
-        padding: 0;
-        color:white;
-        margin: 0;
+            top: 0;
+            padding: 0;
+            color:white;
+            margin: 0;
+        }
+        .center {
+            display:block;
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
     <li><a href="{{ url_for("home") }}">Home</a></li>
@@ -61,41 +62,43 @@
             <h2>Using PlanIt</h2>
             <p>After navigating back to the homepage, feel free to explore the home screen. Hovering over each state 
                 capitol will give you our best estimate of how much energy a single wind turbine or a single solar panel will provide in that geographic region.
-                When you're ready, click the "Build your PlanIt" button at the top of the page. This will bring you to a new page
+                When you're ready, click the "Build your PlanIt" option at the top of the homepage. This will bring you to a new page
                 where you will be prompted to select, from a drop-down list, your use-case: government or resident.</p>
             <i>I. Government Option</i>
             <p> First, we ask that you select your state from the drop down menu. Unfortunately, Hawaii and Alaska are not covered in the database yet.</p> 
-            <p> You should then enter your city or town name. We ask that you enter it with the first letters of any parts of the name capitalized, 
-                and please do not enter an abbreviation (for example, write Los Angeles instead of LA).</p>
+            <p> You should then enter your city or town name. We ask that you enter the city or town name with the appropriate capitalizations and refrain from using
+                abbreviation as these will not be recognized by the database.</p>
+            <p style="text-indent: 30px; color:rgb(15, 128, 63);">Correct: Los Angeles </p>
+            <p style="text-indent: 30px; color:rgb(204, 43, 15);">Incorrect: LA </p>
             <p> Optionally, you can input your energy percentage goal. Not every city or town is ready for complete conversion to renewables, so feel free to enter 
                 anywhere from 1-100%.</p>
             <p> As a government or township entity, we want to know how much land you can dedicate to installing wind turbines and solar panels. You'll be able to explore options 
-                of many combinations of turbines and panels, but first we ask that you enter how much land could be developed into wind and/or solar farms 
+                of various combinations of wind turbines and solar panels, but first we ask that you enter how much land could be used as wind and/or solar farms 
                 (input should be in units of km<sup>2</sup>).</p>                
             <p> Finally, you are required to enter your API key from the NREL website in order to access the data to complete the calculation.</p>
             <p> When you are done entering the required (and optional) information, please wait while the application takes into account your geographic resources, 
                 energy goals, and more.</p>
             <p> The final screen will be a chart that allows for an exploration of our recommendations. You'll notice that you can hover your cursor over 
                 the chart to see the cost of certain turbine and panel combinations and how well that specific combination achieves your goal in a percentage. 
-                Note the black line: this indicates land availability restrictions. Anything above and to the right is realistically impossible 
-                given your inputted land availability. However, feel free to explore the options in that part of the chart to establish context for the recommended 
-                combinations.</p>
+                Note the red line running diagonally through the chart, this indicates land availability restrictions. Anything above and to the right is realistically impossible 
+                given the land availability. However, feel free to explore the options in that part of the chart to establish context for the recommended combinations.</p>
             <i>II. Residential Option</i>
-            <p> Similar to the government option, we ask that you select your state from the dropdown menu (only those states within the continuous 48 will work) and your city or town.</p> 
-            <p> Next, we want to know how big your household is. Single residents to community living scenarios are welcome!</p>
-            <p> You can optionally input your monthly energy usage in kWh. This can be found on your latest electricity bill. 
-                We ask that you ensure this value is for a single month's use (not two months or longer). This will make our 
-                prediction more accurate for your situation. However, if you cannot provide that at this time or if you're just exploring, we will estimate your 
+            <p> Similar to the government option, we ask that you select your state from the dropdown menu (only those states within the continuous 48 will work) and
+                input your city or town.</p> 
+            <p> Next, we want to know your household occupancy, this will help use predict your monthly energy usage. Single residents to community living scenarios are welcome!</p>
+            <p> If you would like a more exact result, you can input your monthly energy usage in kWh (this is entirely optional). Monthly energy usage can be found on your latest electricity bill. 
+                We ask that you ensure this value is for a single month's use (not two months or longer). However, if you cannot provide that at this time or if you're just exploring, we will estimate your 
                 residential energy use ourselves!</p>
             <p> Another optional input is your energy goal percentage. We will assume you want to convert 100% of your energy use to be sourced from renewables, but we 
-                know that that's not always realistic! Feel free to input anywhere from 1-100%.</p>                
-            <p> Finally, you are required to enter your API key from the NREL website in order to access the data to complete the calculation.</p>
-            <p> The results page will detail our expected energy output covered by renewables, how many solar panels we recommend you install, and the 
+                know that's not always realistic! Feel free to input anywhere from 1-100%.</p>                
+            <p> Finally, to complete the calculation, you must enter your API key from the NREL website granting you access the database used in these calculations.</p>
+            <p> The results page will detail the expected energy output covered by renewables, how many solar panels we recommend you install, and the 
                 cost of that installation. However, we know that number of solar panels and cost can be prohibitive! From our research, an average rooftop 
                 can accommodate 25 solar panels. With this in mind, we also provide how much energy 25 panels would provide in your area, what percentage of 
                 your energy conversion goal that achieves, and the cost of that installation.</p>
-            <h3>Thank you for using PlanIt!</h3>
+            <a style="color:lightslategrey; font-size: 35px;" href="{{ url_for("form") }}">Let's get started!</a>  
         </div>
-        <img src="static/not_okay_meme.png">
+        <p>     </p>
+        <img class="center" src="static/not_okay_meme.png">
     </body>
 </html>

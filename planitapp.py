@@ -123,7 +123,7 @@ def form_res():
                 results = wrapper.wrapper(
                     wtk, collected_data[2], collected_data[1],
                     0, residential=True,
-                    energy_bill=float(collected_data[4]),                    
+                    energy_bill=float(collected_data[4]),
                     goal=int(collected_data[5]),
                     household_size=int(collected_data[3]))
             return redirect(url_for("results_res", res_results=results))

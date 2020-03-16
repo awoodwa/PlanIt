@@ -19,17 +19,17 @@ class InputData_gov(FlaskForm):
         api_key: this is required for the user to
             access the database for calculations
     """
-    location = wtforms.StringField("*City/Town: ", [DataRequired()])
+    location = wtforms.StringField("City/Town: ", [DataRequired()])
     state_abbrev = ["AL", "AK",
                     "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
                     "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
                     "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
                     "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
                     "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
-    state = wtforms.SelectField("*State: ", choices=[
+    state = wtforms.SelectField("State: ", choices=[
         (state, state) for state in state_abbrev])
     land_ava = wtforms.StringField(
-        "*Land Available (km<sup>2</sup>): ", [DataRequired()])
+        "Land Available (km<sup>2</sup>): ", [DataRequired()])
     goal_renewable = wtforms.IntegerField("Goal Renewable Energy (%): ")
-    api_key = wtforms.StringField("*API Key: ", [DataRequired()])
+    api_key = wtforms.StringField("API Key: ", [DataRequired()])
     submit = wtforms.SubmitField("Submit")
