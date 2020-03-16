@@ -1,4 +1,4 @@
-""" Application configuration """
+""" Application configuration - required for running the app"""
 
 import os
 

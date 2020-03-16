@@ -15,16 +15,18 @@
     <body class="{{template}}">
         <div class="formwrapper" >
             <h2 class="title" style="color: white;">Build your PlanIt: </h2>
-            <p style="color: white">NOTE: Fields with a star must be completed</p>
+            
             <form method="POST">               
                 <div class="form-field" style="color: ivory;">{{ form_res.state.label }}{{ form_res.state }}</div>
                 <div class="form-field" style="color: ivory;">{{ form_res.location.label }}{{ form_res.location }}</div>
                 <div class="form-field" style="color: ivory;">{{ form_res.household.label }}{{ form_res.household }}</div>
                 <div class="form-field" style="color: ivory;">{{ form_res.energy_bill.label }}{{ form_res.energy_bill }}</div>
+                <div class="form-field" style="color: ivory;">{{ form_res.goal_renewable.label }}{{ form_res.goal_renewable }}</div>
                 <div class="form-field" style="color: ivory;">{{ form_res.api_key.label }}{{ form_res.api_key }}</div>
                 {{form_res.submit}}
             </form>
         </div>
+        <p style="color: white">NOTE: Fields with a star must be completed</p>
     </body>
 </html>
 

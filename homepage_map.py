@@ -1,8 +1,12 @@
+"""
+This script builds the map seen on the homepage of the application
+    - there is no reason to run this more than once
+"""
+
 import altair
 import pandas as pd
 from vega_datasets import data
 
-# Used to build homepage map, this should not run multiple times
 altair.themes.enable("dark")
 
 csv = pd.read_csv("capital_city_energies.csv")

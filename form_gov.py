@@ -4,9 +4,21 @@ from wtforms.validators import DataRequired
 
 
 class InputData_gov(FlaskForm):
-    """ INPUTS: u
-    user type, location, household size,
-    monthly energy used, desired percentage renewable """
+    """
+    This class builds the form for government users
+    INPUTS:
+        state: users will select their state from the list provided
+        location: users will input their city or town
+            (first letter of city/town should be uppercase)
+        household size: users should record the
+            number of members living at their address
+        energy_bill: optional field allowing users to record the
+            energy reported from previous energy bills (units of kWh)
+        goal_percentage_renewable: optional field allowing users
+            to decide how much energy should be from renewable sources
+        api_key: this is required for the user to
+            access the database for calculations
+    """
     location = wtforms.StringField("*City/Town: ", [DataRequired()])
     state_abbrev = ["AL", "AK",
                     "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
@@ -18,5 +30,6 @@ class InputData_gov(FlaskForm):
         (state, state) for state in state_abbrev])
     land_ava = wtforms.StringField(
         "*Land Available (km<sup>2</sup>): ", [DataRequired()])
+    goal_renewable = wtforms.IntegerField("Goal Renewable Energy (%): ")
     api_key = wtforms.StringField("*API Key: ", [DataRequired()])
     submit = wtforms.SubmitField("Submit")

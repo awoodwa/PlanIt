@@ -13,11 +13,18 @@ app.config.from_object("config.Config")
 
 @app.route("/")
 def home():
+    """
+    Directs the user to the homepage of the application
+    """
     return render_template("home.html")
 
 
 @app.route("/PlanIt", methods=("GET", "POST"))
 def form():
+    """
+    Collects the user's selection from the initial form page and
+    redirects them to the appropriate form page to collect the relevant data
+    """
     collected_data = []
     form = InputData()
     if request.method == "POST":
@@ -32,6 +39,11 @@ def form():
 
 @app.route("/gov", methods=("GET", "POST"))
 def form_gov():
+    """
+    Collects the data from the government form and
+    redirects them to the appropriate results page to report
+    the final results
+    """
     collected_data = []
     form_gov = InputData_gov()
     if request.method == "POST":
@@ -40,14 +52,20 @@ def form_gov():
             collected_data.append(request.form.get("state"))
             collected_data.append(request.form.get("location"))
             collected_data.append(request.form.get("land_ava"))
+            collected_data.append(request.form.get("goal_renewable"))
             collected_data.append(request.form.get("api_key"))
             # run "build_config.py" to build file for accessing NREL data
-            build_hscfg.config_file(collected_data[4])
+            build_hscfg.config_file(collected_data[5])
             # input data to wrapper function
             wtk = h5pyd.File("/nrel/wtk-us.h5", "r")
-            results = wrapper.wrapper(
-                wtk, collected_data[2], collected_data[1],
-                float(collected_data[3]))
+            if collected_data[4] == '':
+                results = wrapper.wrapper(
+                    wtk, collected_data[2], collected_data[1],
+                    float(collected_data[3]))
+            else:
+                results = wrapper.wrapper(
+                    wtk, collected_data[2], collected_data[1],
+                    float(collected_data[3]), goal=collected_data[4])
             return redirect(url_for("results_gov", gov_results=results))
         except IndexError:
             flash("ERROR: Check spelling of 'City/Town' or try a nearby city")
@@ -63,6 +81,11 @@ def form_gov():
 
 @app.route("/res", methods=("GET", "POST"))
 def form_res():
+    """
+    Collects the data from the resident form and
+    redirects the user to the appropriate page to report
+    the final results based off of the provided information
+    """
     collected_data = []
     form_res = InputData_res()
     if request.method == "POST":
@@ -73,23 +96,35 @@ def form_res():
             collected_data.append(request.form.get("location"))
             collected_data.append(request.form.get("household"))
             collected_data.append(request.form.get("energy_bill"))
+            collected_data.append(request.form.get("goal_renewable"))
             collected_data.append(request.form.get("api_key"))
             print(collected_data)
             # run "build_config.py" to build file for accessing NREL data
-            build_hscfg.config_file(collected_data[5])
+            build_hscfg.config_file(collected_data[6])
 
             # input data to wrapper function
             wtk = h5pyd.File("/nrel/wtk-us.h5", "r")
             if collected_data[4] == '':
                 results = wrapper.wrapper(
                     wtk, collected_data[2], collected_data[1],
-                    100000, residential=True,
+                    0, goal=int(collected_data[5]), residential=True,
+                    household_size=int(collected_data[3]))
+            if collected_data[5] == '':
+                results = wrapper.wrapper(
+                    wtk, collected_data[2], collected_data[1],
+                    0, residential=True, energy_bill=int(collected_data[4]),
+                    household_size=int(collected_data[3]))
+            if collected_data[4] == '' and collected_data[5] == '':
+                results = wrapper.wrapper(
+                    wtk, collected_data[2], collected_data[1],
+                    0, residential=True,
                     household_size=int(collected_data[3]))
             else:
                 results = wrapper.wrapper(
                     wtk, collected_data[2], collected_data[1],
-                    100000, residential=True,
+                    0, residential=True,
                     energy_bill=int(collected_data[4]),
+                    goal=int(collected_data[5]),
                     household_size=int(collected_data[3]))
             return redirect(url_for("results_res", res_results=results))
         except IndexError:
@@ -103,6 +138,10 @@ def form_res():
 
 @app.route("/results_res/<res_results>")
 def results_res(res_results):
+    """
+    Formats the output from the calculations and
+    reports the residents results
+    """
     result0 = res_results
     res_results = res_results.replace("[", " ")
     res_results = res_results.replace("]", " ")
@@ -112,6 +151,9 @@ def results_res(res_results):
 
 @app.route("/results_gov/<gov_results>")
 def results_gov(gov_results):
+    """
+    Reports a plot based off of the government input information
+    """
     gov_results = gov_results.replace("[", " ")
     gov_results = gov_results.replace("]", " ")
     return render_template("results_gov.html", chart="gov_chart")
@@ -119,11 +161,19 @@ def results_gov(gov_results):
 
 @app.route("/results_gov/")
 def gov_chart():
+    """
+    This function allows the resulting plot to be embedded
+    into the "results_gov" page
+    """
     return render_template("gov_chart.html")
 
 
 @app.route("/home_map/")
 def home_map():
+    """
+    This function allows the homepage_map plot to be embedded
+    into the home page of the application
+    """
     return render_template("energy.html")
 
 
