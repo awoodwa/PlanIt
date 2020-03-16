@@ -13,7 +13,7 @@ Once an API key has been assigned to you, enter it, use this [link](https://plan
 
 ### Using PlanIt
 
-After navigating to the website, feel free to explore the home screen. Hovering over each state capitol will give you our best estimate of how much energy a single wind turbine or a single solar panel will provide in that geographic region.
+After navigating to the website, feel free to explore the home screen. Hovering over each state capital will give you our best estimate of how much energy a single wind turbine or a single solar panel will provide in that geographic region.
 
 When you're ready, click the **PlanIt** button and from the drop-down menu, select your use-case: government or resident.
 
