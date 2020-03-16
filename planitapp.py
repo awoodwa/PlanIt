@@ -65,7 +65,7 @@ def form_gov():
             else:
                 results = wrapper.wrapper(
                     wtk, collected_data[2], collected_data[1],
-                    float(collected_data[3]), goal=collected_data[4])
+                    float(collected_data[3]), goal=int(collected_data[4]))
             return redirect(url_for("results_gov", gov_results=results))
         except IndexError:
             flash("ERROR: Check spelling of 'City/Town' or try a nearby city")
@@ -104,26 +104,26 @@ def form_res():
 
             # input data to wrapper function
             wtk = h5pyd.File("/nrel/wtk-us.h5", "r")
-            if collected_data[4] == '':
-                results = wrapper.wrapper(
-                    wtk, collected_data[2], collected_data[1],
-                    0, goal=int(collected_data[5]), residential=True,
-                    household_size=int(collected_data[3]))
-            if collected_data[5] == '':
-                results = wrapper.wrapper(
-                    wtk, collected_data[2], collected_data[1],
-                    0, residential=True, energy_bill=int(collected_data[4]),
-                    household_size=int(collected_data[3]))
             if collected_data[4] == '' and collected_data[5] == '':
                 results = wrapper.wrapper(
                     wtk, collected_data[2], collected_data[1],
                     0, residential=True,
                     household_size=int(collected_data[3]))
+            elif collected_data[4] == '' and collected_data[5] != '':
+                results = wrapper.wrapper(
+                    wtk, collected_data[2], collected_data[1],
+                    0, goal=int(collected_data[5]), residential=True,
+                    household_size=int(collected_data[3]))
+            elif collected_data[5] == '' and collected_data[4] != '':
+                results = wrapper.wrapper(
+                    wtk, collected_data[2], collected_data[1],
+                    0, residential=True, energy_bill=float(collected_data[4]),
+                    household_size=int(collected_data[3]))
             else:
                 results = wrapper.wrapper(
                     wtk, collected_data[2], collected_data[1],
                     0, residential=True,
-                    energy_bill=int(collected_data[4]),
+                    energy_bill=float(collected_data[4]),                    
                     goal=int(collected_data[5]),
                     household_size=int(collected_data[3]))
             return redirect(url_for("results_res", res_results=results))
