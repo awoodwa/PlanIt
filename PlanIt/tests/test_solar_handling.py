@@ -2,7 +2,7 @@ import numpy as np
 
 import h5pyd
 
-import solar_handling
+from .. import solar_handling
 
 
 def test_create_ghi_tseries():

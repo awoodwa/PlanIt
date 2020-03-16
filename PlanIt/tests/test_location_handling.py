@@ -1,4 +1,4 @@
-import location_handling
+from .. import location_handling
 import h5pyd
 import numpy as np
 

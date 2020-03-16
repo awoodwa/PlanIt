@@ -1,4 +1,4 @@
-import cost_handling
+from .. import cost_handling
 
 
 def test_cost_of_wind():

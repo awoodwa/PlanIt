@@ -1,4 +1,4 @@
-import energy_use_handling
+from .. import energy_use_handling
 import numpy as np
 
 

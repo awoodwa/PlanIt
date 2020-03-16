@@ -1,4 +1,4 @@
-import wrapper
+from .. import wrapper
 import h5pyd
 import altair as alt
 

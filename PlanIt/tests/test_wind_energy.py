@@ -1,6 +1,6 @@
 import numpy as np
 import h5pyd
-from wind_energy import power_eff, weibull_coeff, weibull_pdf, summation, \
+wind_energy import power_eff, weibull_coeff, weibull_pdf, summation, \
                         wind_energy_output, create_tseries, aeo_average, \
                         wind_landuse
 

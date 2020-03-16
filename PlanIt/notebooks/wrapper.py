@@ -1,8 +1,8 @@
-from . import location_handling
-from . import energy_use_handling
-from . import wind_energy
-from . import solar_handling
-from . import cost_handling
+import location_handling
+import energy_use_handling
+import wind_energy
+import solar_handling
+import cost_handling
 
 import pandas as pd
 import numpy as np
