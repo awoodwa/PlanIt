@@ -9,7 +9,7 @@ The world is on fire, and we want to ask you: WWAGD? Whether you're a resident o
 To fully utilize this program, an access code must first be obtained granting access to the data. Follow the link below and enter the appropriate information to get an API key:
     https://developer.nrel.gov/signup/
 
-Once an API key has been assigned to you, **[follow this link to open PlanIt!]**(https://planit-project.herokuapp.com/)
+Once an API key has been assigned to you, [follow this link to open PlanIt!](https://planit-project.herokuapp.com/)
 
 In the app, you will be prompted to input your custom API key.
 
