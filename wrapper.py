@@ -7,6 +7,7 @@ import cost_handling
 import pandas as pd
 import numpy as np
 import altair as alt
+import os
 
 
 def wrapper(wtk, city, state, land_available, goal=100, residential=False,
@@ -35,14 +36,16 @@ def wrapper(wtk, city, state, land_available, goal=100, residential=False,
         energy_saved : how much energy the user saved with only 25 panels
         layer_chart : Altair chart of options (government only)
     '''
+    status = open('status_report.txt', 'a+')
+    status.write('beginning calculation \n')
+    status.flush()
+    os.fsync(status)
     # return this in addition to table
     user_loc = location_handling.get_loc(city, state)
-
     # find location in WTK API
     dataset_loc = location_handling.wtk_locator(wtk, user_loc)
 
     pop = location_handling.get_pop(user_loc)
-
     if residential:
         # if they input an energy bill we use this
         if energy_bill > 0:
@@ -71,6 +74,9 @@ def wrapper(wtk, city, state, land_available, goal=100, residential=False,
 
     else:
         # default setting is for government use - grab estimate of energy use
+        status.write('detected "Government" option \n')
+        status.flush()
+        os.fsync(status)
         gov_per_cap = energy_use_handling.get_tot_energy_per_cap(state)
         energy_use = pop * gov_per_cap
         energy_goal = (energy_use * (goal/100))/1000  # (MWh)
@@ -84,7 +90,9 @@ def wrapper(wtk, city, state, land_available, goal=100, residential=False,
         solar_raw = solar_handling.annual_solar_mean(wtk, dataset_loc)/1000
         # number of panels that can fit (convert to m^2)
         panels = round(land_available * 1e6 / 1.635481)
-
+        status.write('finished solar and wind handling calculations \n')
+        status.flush()
+        os.fsync(status)
         # anything below this limit is possible
         # above the limit is not tenable due to land restrictions
         x = range(round(panels/100000))
@@ -105,7 +113,9 @@ def wrapper(wtk, city, state, land_available, goal=100, residential=False,
         data = pd.DataFrame({'Panels': p.ravel(), 'Turbines': t.ravel(),
                             'e': e.ravel(), 'Cost': c.ravel(),
                              'PercentGoal': gp.ravel()})
-
+        status.write('building plot \n')
+        status.flush()
+        os.fsync(status)
         # create altair option chart with limit line
         alt.themes.enable('dark')
         alt.data_transformers.disable_max_rows()
@@ -141,4 +151,11 @@ def wrapper(wtk, city, state, land_available, goal=100, residential=False,
             )
         layer_chart.save(
             'templates/gov_chart.html', embed_options={'renderer': 'svg'})
+        
+        status.write('completed calculation \n')
+        status.flush()
+        os.fsync(status)
+        status.close()
+        os.remove('status_report.txt')
+
         return "chart"

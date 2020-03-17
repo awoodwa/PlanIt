@@ -1,4 +1,5 @@
-from flask import Flask, request, url_for, render_template, redirect, flash
+from flask import Flask, request, url_for, render_template
+from flask import redirect, flash, Response
 from form import InputData
 from form_res import InputData_res
 from form_gov import InputData_gov
@@ -98,7 +99,6 @@ def form_res():
             collected_data.append(request.form.get("energy_bill"))
             collected_data.append(request.form.get("goal_renewable"))
             collected_data.append(request.form.get("api_key"))
-            print(collected_data)
             # run "build_config.py" to build file for accessing NREL data
             build_hscfg.config_file(collected_data[6])
 
@@ -183,4 +183,4 @@ def about():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
