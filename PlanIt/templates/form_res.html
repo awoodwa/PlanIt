@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        body {
+            background-color: black;
+            background-repeat: no-repeat; 
+            background-size: cover;
+        }
+        div {
+            color: white;
+            font-size: 15pt;
+        }
+    </style>
     <li><a href="{{ url_for("home") }}">Home</a></li>
     <head></head>
     {% for message in get_flashed_messages() %}
     <p style="color: red;">{{ message }}</p>
     {% endfor %}
-    <body class="{{template}}" style="background-color: black;">
+    <body class="{{template}}">
         <div class="formwrapper" >
-            <h2 class="title" style="color: honeydew;">Build your PlanIt: </h2>
-            <p style="color: white">NOTE: Fields with a star must be completed</p>
-            <form method="POST" style="background-color: black;">               
-                <div class="form-field" style="color: ivory;">{{ form_res.state.label }}{{ form_res.state }}</div>
-                <div class="form-field" style="color: ivory;">{{ form_res.location.label }}{{ form_res.location }}</div>
-                <div class="form-field" style="color: ivory;">{{ form_res.household.label }}{{ form_res.household }}</div>
-                <div class="form-field" style="color: ivory;">{{ form_res.monthly_eng.label }}{{ form_res.monthly_eng }}</div>
-                <div class="form-field" style="color: ivory;">{{ form_res.renewable.label }}{{ form_res.renewable }}</div>
-                <div class="form-field" style="color: ivory;">{{ form_res.api_key.label }}{{ form_res.api_key }}</div>
+            <h2 class="title" style="color: white;">Build your PlanIt: </h2>
+            
+            <form method="POST">               
+                <p class="form-field"><b style="color:red">*</b>{{ form_res.state.label }}{{ form_res.state }}</p>
+                <p class="form-field"><b style="color:red">*</b>{{ form_res.location.label }}{{ form_res.location }}</p>
+                <p class="form-field"><b style="color:red">*</b>{{ form_res.household.label }}{{ form_res.household }}</p>
+                <p class="form-field">{{ form_res.energy_bill.label }}{{ form_res.energy_bill }}</p>
+                <p class="form-field">{{ form_res.goal_renewable.label }}{{ form_res.goal_renewable }}</p>
+                <p class="form-field"><b style="color:red">*</b>{{ form_res.api_key.label }}{{ form_res.api_key }}</p>
                 {{form_res.submit}}
             </form>
         </div>
-       <img align="right" src="static/Picture1.jpg"/>
+        <p style="color: white"><i>NOTE:</i> Fields with a <b style="color:red">*</b> must be completed</p>
     </body>
+
 </html>
 
 

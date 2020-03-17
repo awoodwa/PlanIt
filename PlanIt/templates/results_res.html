@@ -8,37 +8,63 @@
             }
             h1 {
                 color: white;
+                text-align: center;
+                font-size: 50px;
+            }
+            h3 {
+            color:slategrey;
+            text-align: center;
+            font-size: 45px;
             }
             p {
                 color: white;
+                text-align: left;
+                font-size: 17px;
             }
             table, th, td {
                 color: white;
+                font-size: 15pt;
+                text-align: left;
             }
             td {
                 text-align: left;
+                font-size: 15pt;
             }
         </style>
-        <title>Your Suggested/Projected PlanIt</title>
+        <title>Results</title>
     </head>
     <body>
         <div>
             <h1>Suggested PlanIt</h1>
-            <table style="width:100%">
+            <p><b style="font-size: 30px; color:white">Your results: </b></p>
+            <table style="width:35%;">
                 <tr>
-                    <td style="text-align: right;">Number of Solar Panels: </td>
-                    <td>{{ result }}</td>
+                    <td style="text-align: right;">Expected energy output (kWh): </td>
+                    <td>{{ result0[0] }}</td>
                 </tr>
                 <tr>
-                    <td style="text-align: right;">Energy Produced from Solar Panels: </td>
-                    <td>{{ result }}</td>
+                    <td style="text-align: right;">Recommended number of solar panels: </td>
+                    <td>{{ result0[1] }}</td>
                 </tr>
                 <tr>
-                    <td style="text-align: right;">Cost of Solar Panels: </td>
-                    <td>{{ result }}</td>
+                    <td style="text-align: right;">Estimated cost ($): </td>
+                    <td>{{ result0[2] }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Expected energy output of 25 panels (kWh): </td>
+                    <td>{{ result0[3] }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Expected energy saved from installing 25 panels (%): </td>
+                    <td>{{ result0[4] }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Cost of 25 solar panels ($): </td>
+                    <td>{{ result0[5] }}</td>
                 </tr>
             </table>
             
         </div>
     </body>
+    <h3>Thank you for using PlanIt!</h3>
 </html>
