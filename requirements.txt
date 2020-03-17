@@ -1,5 +1,7 @@
 altair==3.2.0
 attrs==19.3.0
+autograd==1.3
+autograd-gamma==0.4.2
 certifi==2019.11.28
 chardet==3.0.4
 Click==7.0
@@ -11,6 +13,7 @@ Flask-FlatPages==0.7.1
 Flask-Session==0.3.1
 Flask-WTF==0.14.3
 Frozen-Flask==0.15
+future==0.18.2
 gunicorn==20.0.4
 h5pyd==0.7.1
 idna==2.9
@@ -22,17 +25,18 @@ kiwisolver==1.0.1
 Markdown==3.2.1
 MarkupSafe==1.1.1
 matplotlib==3.1.3
-mccabe==0.6.1
 numpy==1.18.1
 pandas==1.0.1
 pycodestyle==2.5.0
 pyflakes==2.1.1
 pyparsing==2.4.6
+pyproj==2.4.1
 pyrsistent==0.15.7
 python-dateutil==2.8.1
 pytz==2019.3
 PyYAML==5.3
 redis==3.4.1
+reliability==0.4.3
 requests==2.23.0
 scipy==1.4.1
 six==1.14.0
