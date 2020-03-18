@@ -129,3 +129,6 @@ class SimpleTest(unittest.TestCase):
 
         assert result_max_energy < 231748, \
             'Result max energy is higher than expected'
+
+if __name__ == '__main__':
+    unittest.main()
