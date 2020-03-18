@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 import h5pyd
-import wind_energy
+from .. import wind_energy
 
 class SimpleTest(unittest.TestCase):
 
