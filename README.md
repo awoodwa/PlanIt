@@ -38,6 +38,8 @@ When you are done entering the required (and optional) information, please wait 
 
 The final screen will be a chart that allows for an exploration of our recommendations. You'll notice that you can hover your cursor over the chart to see the cost of certain turbine and panel combinations and how well that specific combination achieves your goal in a percentage. Note the black line: this indicates land availability restrictions. Anything above and to the right is realistically impossible given your inputted land availability. However, feel free to explore the options in that part of the chart to establish context for the recommended combinations.
 
+![heroku government gif](https://github.com/awoodwa/PlanIt/blob/master/PlanIt/static/governmentgif.gif)
+
 #### Using the Resident Option
 
 Similar to the government option, we ask that you select your state from the dropdown menu (only those states within the continuous 48 will work) and your city or town.
@@ -51,6 +53,8 @@ Another optional input is your energy goal percentage. We will assume you want t
 Finally, you're required to input your API key you received from the NREL website.
 
 The results page will detail our expected energy output covered by renewables, how many solar panels we recommend you install, and the cost of that installation. However, we know that number of solar panels and cost can be prohibitive! From our research, an average rooftop can accommodate 25 solar panels. With this in mind, we also provide how much energy 25 panels would provide in your area, what percentage of your energy conversion goal that achieves, and the cost of that installation.
+
+![heroku resident gif](https://github.com/awoodwa/PlanIt/blob/master/PlanIt/static/Residentgif.gif)
 
 ### Thank you for using PlanIt!
 

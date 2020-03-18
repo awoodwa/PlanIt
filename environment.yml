@@ -2,4 +2,3 @@ name: environment
 channels:
   - defaults
 prefix: /home/mdbresh/anaconda3/envs/environment
-
