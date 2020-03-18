@@ -8,7 +8,8 @@ class InputData(FlaskForm):
     INPUTS:
         user_type: user will select from a list if they are a
             government entity or a resident
-                - this determines which calculation and variables will be considered
+                - this determines which
+                calculation and variables will be considered
     """
     user_type = wtforms.SelectField("User Type:    ", choices=[
         ("Government", "Government"), ("Resident", "Resident")])

@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 from pyproj import Proj
-import os
 
 
 def get_loc(city, state):

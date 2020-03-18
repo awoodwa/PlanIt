@@ -17,7 +17,7 @@ def create_ghi_tseries(wtk, loc_idx):
     dset = wtk['GHI']
 
     dt = wtk['datetime']
-    dt = pd.DataFrame({'datetime':dt[:]}, index = range(0, dt.shape[0]))
+    dt = pd.DataFrame({'datetime': dt[:]}, index=range(0, dt.shape[0]))
     dt['datetime'] = dt['datetime'].apply(dateutil.parser.parse)
 
     twenty07 = dt.loc[(dt.datetime >= '2007-01-01') &

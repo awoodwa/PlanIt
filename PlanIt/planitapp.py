@@ -1,5 +1,5 @@
 from flask import Flask, request, url_for, render_template
-from flask import redirect, flash, Response
+from flask import redirect, flash
 from form import InputData
 from form_res import InputData_res
 from form_gov import InputData_gov
