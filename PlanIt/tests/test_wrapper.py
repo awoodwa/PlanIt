@@ -13,7 +13,7 @@ def test_wrapper():
 
     assert type(test_gov) == alt.vegalite.v3.api.LayerChart,\
         'Test result type (%s) is not of type (%s).'\
-        % (str(test_gov), 'alt.vegalite.v3.api.LayerChart')
+        % (str(test_gov), 'alt.vegalite.v4.api.LayerChart')
 
     # now to test the residential branch
     test_res =\
