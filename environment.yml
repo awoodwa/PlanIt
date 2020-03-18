@@ -9,6 +9,7 @@ dependencies:
   - ca-certificates=2020.1.1=0
   - certifi=2019.11.28=py38_0
   - click=7.0=py_0
+  - coverage=5.0.4
   - cycler=0.10.0=py38_0
   - dbus=1.13.12=h746ee38_0
   - entrypoints=0.3=py38_0
