@@ -26,7 +26,7 @@ before_install:
         
 # list of commands to run to setup the environment
 install:
-    - conda export --no-builds > environment.yml
+    - conda env export --no-builds > environment.yml
     - conda env create -q -n test-environment python=$TRAVIS_PYTHON_VERSION --file environment.yml
     - conda activate test-environment
     - conda install --yes coverage coveralls flake8
