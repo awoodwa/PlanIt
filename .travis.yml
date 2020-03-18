@@ -3,9 +3,8 @@ language: python
 
 # what version to use
 python:
+  - 3.7
   - 3.6
-  - 3.5
-  - 2.7
 
 # what branches to test
 branches:
