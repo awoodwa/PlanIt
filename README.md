@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/awoodwa/PlanIt.svg?branch=master)](https://travis-ci.com/awoodwa/PlanIt)
 
 
-# Welcome to PlanIt
+![logo](https://github.com/awoodwa/PlanIt/blob/master/PlanIt/static/logo.jpg)
 
 ## What would Al Gore do?
 
