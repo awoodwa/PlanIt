@@ -59,3 +59,6 @@ The results page will detail our expected energy output covered by renewables, h
 ### Thank you for using PlanIt!
 
 ![Not Okay Meme](https://github.com/awoodwa/PlanIt/blob/master/PlanIt/static/not_okay_meme.PNG)
+
+If you are interested in using the app from your local machine, checkout the instructions on the "heroku_app" branch in this repo or follow this link:
+    https://github.com/awoodwa/PlanIt/tree/heroku_app
