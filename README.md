@@ -9,6 +9,10 @@ First, you must download the repo:
 
 `$ git clone https://github.com/awoodwa/PlanIt.git`
 
+Go into the "PlanIt" folder:
+
+`$ cd PlanIt`
+
 Switch to the heroku_app branch using the command:
 
 `$ git checkout heroku_app`
