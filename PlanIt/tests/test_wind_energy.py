@@ -1,3 +1,4 @@
+import unittest
 import numpy as np
 import h5pyd
 from .. import wind_energy
