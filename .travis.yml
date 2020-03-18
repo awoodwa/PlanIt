@@ -26,7 +26,8 @@ before_install:
         
 # list of commands to run to setup the environment
 install:
-    - conda env export --name test-environment --file environment.yml --no-builds
+    - conda env create --name test-environment --file environment.yml
+    - conda env export --no-builds > test-environment.yml
     - conda activate test-environment
     - conda install --yes coverage coveralls flake8
 
