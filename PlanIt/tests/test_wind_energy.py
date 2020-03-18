@@ -3,7 +3,7 @@ import numpy as np
 import h5pyd
 import wind_energy
 
-class SimpleTest(unittest.TestCase)::
+class SimpleTest(unittest.TestCase):
 
     wtk = h5pyd.File("/nrel/wtk-us.h5", 'r')
     NYC_idx = (1044, 2378)
