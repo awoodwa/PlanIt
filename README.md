@@ -30,7 +30,7 @@ You should then enter your city or town name. We ask that you enter it with the 
 
 Optionally, you can input your energy percentage goal. Not every city or town is ready for complete conversion to renewables, so feel free to enter anywhere from 1-100%.
 
-As a government or township entity, we want to know how much land you can dedicate to installing wind turbines and solar panels. You'll be able to explore options of many combinations of turbines and panels, but first we ask that you enter how much land could be developed into wind and/or solar farms. Please use $km^2$.
+As a government or township entity, we want to know how much land you can dedicate to installing wind turbines and solar panels. You'll be able to explore options of many combinations of turbines and panels, but first we ask that you enter how much land could be developed into wind and/or solar farms. Please use km<sup>2</sup>.
 
 Finally, you are required to enter your API key from the NREL website in order to access the data.
 
